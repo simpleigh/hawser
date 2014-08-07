@@ -10,7 +10,7 @@ const struct option OPTIONS[] = {
 };
 
 typedef struct Option {
-	void (*store)(char *);
+	void (*store)(const char *);
 } Option;
 
 const Option OPTS[] = {

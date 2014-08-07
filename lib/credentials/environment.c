@@ -3,27 +3,30 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Env {
+typedef struct EnvironmentVariable {
 	const char *name;
-	void (*store)(char *);
-} Env;
+	void (*store)(const char *);
+} EnvironmentVariable;
 
-const Env ENV[] = {
+/**
+ * List of environment variables to read
+ * Maps possible environment variables to the functions used to store them.
+ */
+static const EnvironmentVariable ENVIRONMENT_VARIABLES[] = {
 	{ "AWS_ACCESS_KEY_ID",     credentials_set_access_key_id     },
-	{ "AWS_SECRET_ACCESS_KEY", credentials_set_secret_access_key }
+	{ "AWS_SECRET_ACCESS_KEY", credentials_set_secret_access_key },
+	{ NULL,                    NULL                              }
 };
 
 void
 credentials_load_environment()
 {
-	size_t cFields = sizeof(ENV) / sizeof(Env);
-	size_t i;
-	char *source;
+	const EnvironmentVariable *variable = ENVIRONMENT_VARIABLES;
+	char *value;
 
-	for (i = 0; i < cFields; i++) {
-		source = getenv(ENV[i].name);
-		if (source != NULL) {
-			ENV[i].store(source);
-		}
+	while (variable->name) {
+		value = getenv(variable->name);
+		variable->store(value);
+		variable++;
 	}
 }

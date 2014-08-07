@@ -22,15 +22,21 @@ credentials_get_secret_access_key()
 }
 
 void
-credentials_set_access_key_id(char *src)
+credentials_set_access_key_id(const char *src)
 {
+	if (src == NULL) {
+		return;
+	}
 	memcpy(credentials.access_key_id, src, 20);
 	credentials.access_key_id[20] = '\0';
 }
 
 void
-credentials_set_secret_access_key(char *src)
+credentials_set_secret_access_key(const char *src)
 {
+	if (src == NULL) {
+		return;
+	}
 	memcpy(credentials.secret_access_key, src, 40);
 	credentials.secret_access_key[40] = '\0';
 }
