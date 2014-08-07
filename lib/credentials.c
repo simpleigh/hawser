@@ -48,3 +48,10 @@ credentials_set_secret_access_key(const char *src)
 {
 	credentials_set(credentials.secret_access_key, src, 40);
 }
+
+void
+credentials_load(int argc, char **argv)
+{
+	credentials_load_environment();
+	credentials_load_arguments(argc, argv);
+}

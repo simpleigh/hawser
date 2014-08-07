@@ -6,6 +6,7 @@ const char * credentials_get_secret_access_key();
 void credentials_set_access_key_id(const char *src);
 void credentials_set_secret_access_key(const char *src);
 
+void credentials_load(int argc, char **argv);
 void credentials_load_environment();
 void credentials_load_arguments(int argc, char **argv);
 

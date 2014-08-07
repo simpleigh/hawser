@@ -6,8 +6,7 @@
 
 int main(int argc, char **argv)
 {
-	credentials_load_environment();
-	credentials_load_arguments(argc, argv);
+	credentials_load(argc, argv);
 	printf("Access Key ID: %s\n",     credentials_get_access_key_id());
 	printf("Secret access key: %s\n", credentials_get_secret_access_key());
 	return 0;
