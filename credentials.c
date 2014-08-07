@@ -7,9 +7,21 @@ typedef struct Credentials {
 
 static Credentials credentials = { "", "" };
 
+const char *
+credentials_get_access_key_id()
+{
+	return credentials.access_key_id;
+}
+
+const char *
+credentials_get_secret_access_key()
+{
+	return credentials.secret_access_key;
+}
+
 int main(void)
 {
-	printf("Access Key ID: %s\n",     credentials.access_key_id);
-	printf("Secret access key: %s\n", credentials.secret_access_key);
+	printf("Access Key ID: %s\n",     credentials_get_access_key_id());
+	printf("Secret access key: %s\n", credentials_get_secret_access_key());
 	return 0;
 }
