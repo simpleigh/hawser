@@ -1,3 +1,4 @@
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -48,9 +49,43 @@ credentials_load_environment()
 	}
 }
 
-int main(void)
+const struct option OPTIONS[] = {
+	{ "access-key-id",     required_argument, NULL, 0 },
+	{ "secret-access-key", required_argument, NULL, 0 },
+	{ NULL,                0,                 NULL, 0 }
+};
+
+typedef struct Option {
+	char *destination;
+	size_t length;
+} Option;
+
+const Option OPTS[] = {
+	{ credentials.access_key_id,     20 },
+	{ credentials.secret_access_key, 40 }
+};
+
+void
+credentials_load_command_line(int argc, char **argv)
+{
+	int c;
+
+	while (1) {
+		int option_index = 0;
+		c = getopt_long(argc, argv, "", OPTIONS, &option_index);
+		if (c == -1) {
+			break;
+		}
+
+		memcpy(OPTS[option_index].destination, optarg, OPTS[option_index].length);
+		OPTS[option_index].destination[OPTS[option_index].length] = '\0';
+	}
+}
+
+int main(int argc, char **argv)
 {
 	credentials_load_environment();
+	credentials_load_command_line(argc, argv);
 	printf("Access Key ID: %s\n",     credentials_get_access_key_id());
 	printf("Secret access key: %s\n", credentials_get_secret_access_key());
 	return 0;
