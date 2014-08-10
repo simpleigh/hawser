@@ -1,7 +1,5 @@
 #include "../credentials.h"
 
-#include <stdio.h>
-
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
@@ -34,5 +32,6 @@ credentials_load_user_file()
 	strncpy(szFilename, pw->pw_dir, cbHomeDirectory);
 	strcpy(szFilename + cbHomeDirectory, "/.hawser");
 
-	printf("File: %s\n", szFilename);
+	credentials_load_file(szFilename);
+	free(szFilename);
 }
