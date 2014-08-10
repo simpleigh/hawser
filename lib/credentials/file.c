@@ -1,4 +1,5 @@
 #include "../credentials.h"
+#include "../string.h"
 
 #include <regex.h>
 #include <stdio.h>
@@ -33,16 +34,6 @@ static FileEntry FILE_ENTRIES[] = {
 };
 
 static void
-strappend(char **pszDestination, const char *szSource)
-{
-	while (*szSource) {
-		**pszDestination = *szSource;
-		(*pszDestination)++;
-		szSource++;
-	}
-}
-
-static void
 free_regex(FileEntry *fileEntry)
 {
 	regfree(fileEntry->compiled);
@@ -61,11 +52,11 @@ compile_regexes(FileEntry *fileEntry)
 
 	while (fileEntry->name) {
 		szPointer = szRegex;
-		strappend(&szPointer, "^[ \t]*");
-		strappend(&szPointer, fileEntry->name);
-		strappend(&szPointer, "[ \t]*=[ \t]*(");
-		strappend(&szPointer, fileEntry->pattern);
-		strappend(&szPointer, ")[ \t]*");
+		szPointer = strappend(szPointer, "^[ \t]*");
+		szPointer = strappend(szPointer, fileEntry->name);
+		szPointer = strappend(szPointer, "[ \t]*=[ \t]*(");
+		szPointer = strappend(szPointer, fileEntry->pattern);
+		szPointer = strappend(szPointer, ")[ \t]*");
 		*szPointer = '\0';
 
 		fileEntry->compiled = malloc(sizeof(regex_t));
