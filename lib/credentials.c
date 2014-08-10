@@ -52,6 +52,7 @@ credentials_set_secret_access_key(const char *src)
 void
 credentials_load(int argc, char **argv)
 {
+	credentials_load_user_file();
 	credentials_load_environment();
 	credentials_load_arguments(argc, argv);
 }
