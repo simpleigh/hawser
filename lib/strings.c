@@ -1,4 +1,4 @@
-#include "string.h"
+#include "strings.h"
 
 char *
 strappend(char *szDestination, const char *szSource)

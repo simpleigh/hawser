@@ -1,4 +1,4 @@
-#include "lib/credentials.h"
+#include "../lib/credentials.h"
 
 #include <getopt.h>
 #include <stdio.h>

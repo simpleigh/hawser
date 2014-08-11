@@ -1,5 +1,5 @@
 #include "../credentials.h"
-#include "../string.h"
+#include "../strings.h"
 
 #include <regex.h>
 #include <stdio.h>

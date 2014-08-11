@@ -1,0 +1,4 @@
+*.o
+libhawser.a
+Makefile
+Makefile.in

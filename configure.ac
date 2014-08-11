@@ -8,9 +8,11 @@ AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 # Checks for programs.
 AC_PROG_CC
 
+AC_PROG_RANLIB
+
 # Output files
 AC_CONFIG_HEADERS([config.h])
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile])
 
 AC_OUTPUT

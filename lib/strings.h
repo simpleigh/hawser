@@ -1,5 +1,5 @@
-#ifndef __STRING_H
-#define __STRING_H
+#ifndef __STRINGS_H
+#define __STRINGS_H
 
 /**
  * Append a string onto another.
@@ -25,4 +25,4 @@
  */
 char *strappend(char *szDestination, const char *szSource);
 
-#endif /* __STRING_H */
+#endif /* __STRINGS_H */
