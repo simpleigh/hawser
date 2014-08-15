@@ -20,4 +20,3 @@ void buffer_clear(BUFFER *buffer);
 void buffer_destroy(BUFFER *buffer);
 
 #endif /* __BUFFER_H */
-

@@ -14,7 +14,7 @@ static const size_t DEFAULT_BUFFER_SIZE = 1024;
 BUFFER *
 buffer_create(void)
 {
-	BUFFER *buffer = malloc(sizeof(buffer));
+	BUFFER *buffer = malloc(sizeof(BUFFER));
 	if (!buffer) {
 		exit(EXIT_FAILURE);
 	}

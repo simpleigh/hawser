@@ -1,9 +1,9 @@
-#include "../credentials.h"
-#include "../buffer.h"
-
 #include <regex.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "../credentials.h"
+#include "../buffer.h"
 
 #define LINE_BUFFER 200
 

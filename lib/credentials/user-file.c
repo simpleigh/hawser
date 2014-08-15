@@ -1,11 +1,11 @@
-#include "../credentials.h"
-#include "../buffer.h"
-
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include <unistd.h>
+
+#include "../credentials.h"
+#include "../buffer.h"
 
 void
 credentials_load_user_file()

@@ -1,6 +1,6 @@
-#include "credentials.h"
-
 #include <string.h>
+
+#include "credentials.h"
 
 typedef struct Credentials {
 	char access_key_id[21];

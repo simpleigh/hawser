@@ -1,7 +1,7 @@
-#include "../credentials.h"
-
 #include <getopt.h>
 #include <stdlib.h>
+
+#include "../credentials.h"
 
 const struct option GETOPT_OPTIONS[] = {
 	{ "access-key-id",     required_argument, NULL, 0 },

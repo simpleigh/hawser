@@ -1,7 +1,7 @@
-#include "../credentials.h"
-
 #include <stdlib.h>
 #include <string.h>
+
+#include "../credentials.h"
 
 typedef struct EnvironmentVariable {
 	const char *name;

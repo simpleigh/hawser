@@ -1,9 +1,9 @@
-#include "../credentials.h"
-#include "../buffer.h"
-
 #include <curl/curl.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "../credentials.h"
+#include "../buffer.h"
 
 static const char const URL_ROOT[] =
 	"http://instance-data/latest/meta-data/iam/security-credentials/";
