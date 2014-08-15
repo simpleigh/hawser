@@ -5,6 +5,7 @@ libhawser_a_SOURCES = credentials.h             \
                       credentials/arguments.c   \
                       credentials/environment.c \
                       credentials/file.c        \
+                      credentials/iam.c         \
                       credentials/user-file.c   \
                       strings.h                 \
                       strings.c

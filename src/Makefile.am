@@ -1,4 +1,4 @@
-LDADD = ../lib/libhawser.a
+LDADD = ../lib/libhawser.a -lcurl
 
 bin_PROGRAMS = creds
 
