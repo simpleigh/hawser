@@ -123,6 +123,18 @@ buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString)
 
 
 void
+buffer_clear(BUFFER *buffer)
+{
+	if (!buffer || !buffer->szBuffer) {
+		exit(EXIT_FAILURE);
+	}
+
+	buffer->cbContents = 0;
+	buffer->szBuffer[0] = '\0';
+}
+
+
+void
 buffer_destroy(BUFFER *buffer)
 {
 	if (!buffer) {
