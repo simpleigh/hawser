@@ -1,17 +1,5 @@
 #include "strings.h"
 
-char *
-strappend(char *szDestination, const char *szSource)
-{
-	while (*szSource) {
-		*szDestination = *szSource;
-		szDestination++;
-		szSource++;
-	}
-
-	return szDestination;
-}
-
 size_t
 strlinelen(const char *szString)
 {
