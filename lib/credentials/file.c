@@ -1,12 +1,11 @@
 #include "../credentials.h"
-#include "../strings.h"
+#include "../buffer.h"
 
 #include <regex.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #define LINE_BUFFER 200
-#define REGEX_BUFFER 80
 
 typedef struct FileEntry {
 	const char * const name;
@@ -77,27 +76,31 @@ credentials_load_file(const char *filename)
 static void
 compile_regexes(FileEntry *fileEntry)
 {
-	char szRegex[REGEX_BUFFER];
-	char *szPointer;
+	BUFFER *buffer;
 	int result;
 
 	while (fileEntry->name) {
-		szPointer = szRegex;
-		szPointer = strappend(szPointer, "^[ \t]*");
-		szPointer = strappend(szPointer, fileEntry->name);
-		szPointer = strappend(szPointer, "[ \t]*=[ \t]*(");
-		szPointer = strappend(szPointer, fileEntry->pattern);
-		szPointer = strappend(szPointer, ")[ \t]*");
-		*szPointer = '\0';
+		buffer = buffer_create();
+		buffer_append(buffer, "^[ \t]*");
+		buffer_append(buffer, fileEntry->name);
+		buffer_append(buffer, "[ \t]*=[ \t]*(");
+		buffer_append(buffer, fileEntry->pattern);
+		buffer_append(buffer, ")[ \t]*");
 
 		fileEntry->compiled = malloc(sizeof(regex_t));
 		if (fileEntry->compiled) {
-			result = regcomp(fileEntry->compiled, szRegex, REG_EXTENDED);
+			result = regcomp(
+				fileEntry->compiled,
+				buffer_data(buffer),
+				REG_EXTENDED
+			);
+
 			if (result) {
 				free_regex(fileEntry);
 			}
 		}
 
+		buffer_destroy(buffer);
 		fileEntry++;
 	}
 }
@@ -122,4 +125,3 @@ free_regex(FileEntry *fileEntry)
 }
 
 #undef LINE_BUFFER
-#undef REGEX_BUFFER

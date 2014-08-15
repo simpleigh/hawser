@@ -1,4 +1,5 @@
 #include "../credentials.h"
+#include "../buffer.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -11,27 +12,14 @@ credentials_load_user_file()
 {
 	uid_t uid = getuid();
 	struct passwd *pw = getpwuid(uid);
-	size_t cbHomeDirectory;
-	char *szFilename;
+	BUFFER *buffer;
 
 	if (!pw || !pw->pw_dir) {
 		return;
 	}
 
-	cbHomeDirectory = strlen(pw->pw_dir);
-	szFilename = malloc(
-		cbHomeDirectory
-			+ 8 /* '/' '.' 'h' 'a' 'w' 's' 'e' 'r' */
-			+ 1 /* Terminating null. */
-	);
-
-	if (!szFilename) {
-		return;
-	}
-
-	strncpy(szFilename, pw->pw_dir, cbHomeDirectory);
-	strcpy(szFilename + cbHomeDirectory, "/.hawser");
-
-	credentials_load_file(szFilename);
-	free(szFilename);
+	buffer = buffer_from(pw->pw_dir);
+	buffer_append(buffer, "/.hawser");
+	credentials_load_file(buffer_data(buffer));
+	buffer_destroy(buffer);
 }
