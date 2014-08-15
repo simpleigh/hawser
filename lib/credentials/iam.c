@@ -36,12 +36,7 @@ credentials_load_iam()
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
 	curl_easy_perform(curl);
 
-	buffer_append(url, "/");
-	buffer_nappend(
-		url,
-		buffer_data(response),
-		strlinelen(buffer_data(response))
-	);
+	buffer_append_line(url, buffer_data(response));
 
 	buffer_clear(response);
 	curl_easy_setopt(curl, CURLOPT_URL, buffer_data(url));

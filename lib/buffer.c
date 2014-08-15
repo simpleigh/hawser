@@ -122,6 +122,23 @@ buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString)
 }
 
 
+size_t
+buffer_append_line(BUFFER *buffer, const char *szString)
+{
+	size_t cbString = 0;
+
+	if (!buffer || !buffer->szBuffer) {
+		exit(EXIT_FAILURE);
+	}
+
+	while (szString[cbString] != '\0' && szString[cbString] != '\n') {
+		cbString++;
+	}
+
+	return buffer_nappend(buffer, szString, cbString);
+}
+
+
 void
 buffer_clear(BUFFER *buffer)
 {
