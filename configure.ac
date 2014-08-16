@@ -7,10 +7,15 @@ AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 # Checks for programs.
 AC_PROG_CC
-
 AC_PROG_RANLIB
 
-# Output files
+# Checks for libraries.
+LIBCURL_CHECK_CONFIG
+if test "$HAVE_LIBCURL" = :; then
+	AC_MSG_ERROR([Cannot find libcurl: aborting.])
+fi
+
+# Output files.
 AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile])

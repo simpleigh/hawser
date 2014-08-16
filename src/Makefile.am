@@ -1,4 +1,6 @@
-LDADD = ../lib/libhawser.a -lcurl
+LDADD = ../lib/libhawser.a @LIBCURL@
+
+AC_CPPFLAGS = @LIBCURL_CPPFLAGS@
 
 bin_PROGRAMS = creds
 
