@@ -5,9 +5,10 @@
 typedef struct Config {
 	char access_key_id[21];
 	char secret_access_key[41];
+	int unsigned debug;
 } Config;
 
-static Config config = { "", "" };
+static Config config = { "", "", 0 };
 
 const char *
 config_get_access_key_id()
@@ -19,6 +20,12 @@ const char *
 config_get_secret_access_key()
 {
 	return config.secret_access_key;
+}
+
+unsigned int
+config_get_debug()
+{
+	return config.debug;
 }
 
 void
@@ -47,6 +54,12 @@ void
 config_set_secret_access_key(const char *src)
 {
 	config_set(config.secret_access_key, src, 40);
+}
+
+void
+config_set_debug(__attribute__((unused)) const char *src)
+{
+	config.debug = 1;
 }
 
 void

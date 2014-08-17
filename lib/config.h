@@ -3,8 +3,11 @@
 
 const char * config_get_access_key_id();
 const char * config_get_secret_access_key();
+unsigned int config_get_debug();
+
 void config_set_access_key_id(const char *src);
 void config_set_secret_access_key(const char *src);
+void config_set_debug(const char *src);
 
 void config_load(int argc, char **argv);
 void config_load_iam();
