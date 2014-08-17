@@ -2,7 +2,12 @@
 
 #include "config.h"
 
-Config config = { "", "", 0 };
+Config config = {
+	"", /* access_key_id     */
+	"", /* secret_access_key */
+	0,  /* iam_role          */
+	0   /* debug             */
+};
 
 void
 config_set(char *dest, const char *src, size_t len)
@@ -33,6 +38,12 @@ config_set_secret_access_key(const char *src)
 }
 
 void
+config_set_iam_role(__attribute__((unused)) const char *src)
+{
+	config.iam_role = 1;
+}
+
+void
 config_set_debug(__attribute__((unused)) const char *src)
 {
 	config.debug = 1;
@@ -41,9 +52,12 @@ config_set_debug(__attribute__((unused)) const char *src)
 void
 config_load(int argc, char **argv)
 {
-	config_load_iam();
 	config_load_file("/etc/hawser");
 	config_load_user_file();
 	config_load_environment();
 	config_load_arguments(argc, argv);
+
+	if (config.iam_role) {
+		config_load_iam();
+	}
 }

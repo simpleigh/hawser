@@ -4,6 +4,7 @@
 typedef struct Config {
 	char access_key_id[21];
 	char secret_access_key[41];
+	int unsigned iam_role;
 	int unsigned debug;
 } Config;
 
@@ -11,6 +12,7 @@ extern Config config;
 
 void config_set_access_key_id(const char *src);
 void config_set_secret_access_key(const char *src);
+void config_set_iam_role(const char *src);
 void config_set_debug(const char *src);
 
 void config_load(int argc, char **argv);
