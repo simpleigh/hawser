@@ -1,12 +1,14 @@
 #include <string.h>
 
+#include "buffer.h"
 #include "config.h"
 
 Config config = {
-	"", /* szAccessKeyId     */
-	"", /* szSecretAccessKey */
-	0,  /* fIamRole          */
-	0   /* fDebug            */
+	"",   /* szAccessKeyId     */
+	"",   /* szSecretAccessKey */
+	NULL, /* szToken           */
+	0,    /* fIamRole          */
+	0     /* fDebug            */
 };
 
 static void
@@ -38,6 +40,20 @@ void
 config_set_secret_access_key(const char *szInput)
 {
 	config_set(config.szSecretAccessKey, szInput, 40);
+}
+
+void
+config_set_token(const char *szInput)
+{
+	if (szInput == NULL) {
+		return;
+	}
+
+	if (config.bufToken) {
+		buffer_destroy(config.bufToken);
+	}
+
+	config.bufToken = buffer_from(szInput);
 }
 
 void

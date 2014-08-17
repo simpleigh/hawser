@@ -45,7 +45,7 @@ config_load_file(const char *szFilename)
 	char szLine[LINE_BUFFER];
 	FileEntry *pFileEntry;
 	int result;
-	regmatch_t pMatches[2];
+	regmatch_t rgMatches[2];
 
 	printf("Loading %s\n", szFilename);
 
@@ -59,17 +59,17 @@ config_load_file(const char *szFilename)
 		pFileEntry = FILE_ENTRIES;
 		while (pFileEntry->szParameter) {
 			result = regexec(
-				pFileEntry->pRegexCompiled,            /* preg   */
-				szLine,                                /* string */
-				sizeof(pMatches) / sizeof(regmatch_t), /* nmatch */
-				pMatches,                              /* pmatch */
-				0                                      /* eflags */
+				pFileEntry->pRegexCompiled, /* preg   */
+				szLine,                     /* string */
+				2,                          /* nmatch */
+				rgMatches,                  /* pmatch */
+				0                           /* eflags */
 			);
 
 			if (result == 0) {
 				/* Insert null at end of match. */
-				szLine[pMatches[1].rm_eo] = '\0';
-				pFileEntry->store(szLine + pMatches[1].rm_so);
+				szLine[rgMatches[1].rm_eo] = '\0';
+				pFileEntry->store(szLine + rgMatches[1].rm_so);
 			}
 
 			pFileEntry++;
