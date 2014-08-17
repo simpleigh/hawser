@@ -2,31 +2,7 @@
 
 #include "config.h"
 
-typedef struct Config {
-	char access_key_id[21];
-	char secret_access_key[41];
-	int unsigned debug;
-} Config;
-
-static Config config = { "", "", 0 };
-
-const char *
-config_get_access_key_id()
-{
-	return config.access_key_id;
-}
-
-const char *
-config_get_secret_access_key()
-{
-	return config.secret_access_key;
-}
-
-unsigned int
-config_get_debug()
-{
-	return config.debug;
-}
+Config config = { "", "", 0 };
 
 void
 config_set(char *dest, const char *src, size_t len)

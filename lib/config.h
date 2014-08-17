@@ -1,9 +1,13 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-const char * config_get_access_key_id();
-const char * config_get_secret_access_key();
-unsigned int config_get_debug();
+typedef struct Config {
+	char access_key_id[21];
+	char secret_access_key[41];
+	int unsigned debug;
+} Config;
+
+extern Config config;
 
 void config_set_access_key_id(const char *src);
 void config_set_secret_access_key(const char *src);
