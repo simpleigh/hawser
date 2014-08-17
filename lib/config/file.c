@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../credentials.h"
+#include "../config.h"
 #include "../buffer.h"
 
 #define LINE_BUFFER 200
@@ -19,13 +19,13 @@ static FileEntry FILE_ENTRIES[] = {
 		"access_key_id",
 		"[^ \t]{20}",
 		NULL,
-		credentials_set_access_key_id
+		config_set_access_key_id
 	},
 	{
 		"secret_access_key",
 		"[^ \t]{40}",
 		NULL,
-		credentials_set_secret_access_key
+		config_set_secret_access_key
 	},
 	{
 		NULL,
@@ -40,7 +40,7 @@ static void free_regexes(FileEntry *fileEntry);
 static void free_regex(FileEntry *fileEntry);
 
 void
-credentials_load_file(const char *filename)
+config_load_file(const char *filename)
 {
 	FileEntry *fileEntry;
 	FILE *stream = fopen(filename, "r");

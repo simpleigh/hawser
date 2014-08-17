@@ -1,7 +1,7 @@
 #include <getopt.h>
 #include <stdlib.h>
 
-#include "../credentials.h"
+#include "../config.h"
 
 const struct option GETOPT_OPTIONS[] = {
 	{ "access-key-id",     required_argument, NULL, 0 },
@@ -12,12 +12,12 @@ const struct option GETOPT_OPTIONS[] = {
 /* Array of const pointers to functions. */
 /* Should line up with GETOPT_OPTIONS. */
 void (* const STORES[])(const char *) = {
-	credentials_set_access_key_id,
-	credentials_set_secret_access_key
+	config_set_access_key_id,
+	config_set_secret_access_key
 };
 
 void
-credentials_load_arguments(int argc, char **argv)
+config_load_arguments(int argc, char **argv)
 {
 	int c;
 

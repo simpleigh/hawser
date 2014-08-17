@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../credentials.h"
+#include "../config.h"
 #include "../buffer.h"
 #include "../curl.h"
 
@@ -8,7 +8,7 @@ static const char * const URL_ROOT =
 	"http://instance-data/latest/meta-data/iam/security-credentials/";
 
 void
-credentials_load_iam()
+config_load_iam()
 {
 	BUFFER *response;
 	BUFFER *url = buffer_from(URL_ROOT);

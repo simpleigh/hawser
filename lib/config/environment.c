@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../credentials.h"
+#include "../config.h"
 
 typedef struct EnvironmentVariable {
 	const char *name;
@@ -13,13 +13,13 @@ typedef struct EnvironmentVariable {
  * Maps possible environment variables to the functions used to store them.
  */
 static const EnvironmentVariable ENVIRONMENT_VARIABLES[] = {
-	{ "AWS_ACCESS_KEY_ID",     credentials_set_access_key_id     },
-	{ "AWS_SECRET_ACCESS_KEY", credentials_set_secret_access_key },
+	{ "AWS_ACCESS_KEY_ID",     config_set_access_key_id     },
+	{ "AWS_SECRET_ACCESS_KEY", config_set_secret_access_key },
 	{ NULL,                    NULL                              }
 };
 
 void
-credentials_load_environment()
+config_load_environment()
 {
 	const EnvironmentVariable *variable = ENVIRONMENT_VARIABLES;
 	char *value;
