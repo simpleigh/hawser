@@ -10,7 +10,7 @@ AC_PROG_CC
 AC_PROG_RANLIB
 
 # Checks for libraries.
-LIBCURL_CHECK_CONFIG
+LIBCURL_CHECK_CONFIG([yes], [7.10.8])
 if test "$HAVE_LIBCURL" = :; then
 	AC_MSG_ERROR([Cannot find libcurl: aborting.])
 fi

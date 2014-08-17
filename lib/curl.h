@@ -3,7 +3,7 @@
 
 #include "buffer.h"
 
-void curl_get(BUFFER *buffer, const char *szUrl);
+unsigned int curl_get(BUFFER *buffer, const char *szUrl);
 
 void curl_cleanup(void);
 

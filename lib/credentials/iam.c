@@ -14,15 +14,20 @@ credentials_load_iam()
 	BUFFER *url = buffer_from(URL_ROOT);
 
 	response = buffer_create();
-	curl_get(response, URL_ROOT);
+	if (!curl_get(response, URL_ROOT)) {
+		goto err;
+	}
 
 	buffer_append_line(url, buffer_data(response));
 
 	buffer_clear(response);
-	curl_get(response, buffer_data(url));
+	if (!curl_get(response, buffer_data(url))) {
+		goto err;
+	}
 
 	printf("%s\n", buffer_data(response));
 
+err:
 	buffer_destroy(response);
 	buffer_destroy(url);
 }

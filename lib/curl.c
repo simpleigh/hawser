@@ -19,9 +19,12 @@ curl_write(char *ptr, size_t size, size_t nmemb, void *userdata)
 }
 
 
-void
+unsigned int
 curl_get(BUFFER *buffer, const char *szUrl)
 {
+	CURLcode result;
+	long responseCode;
+
 	if (!curl) {
 		curl = curl_easy_init();
 		if (!curl) {
@@ -32,7 +35,21 @@ curl_get(BUFFER *buffer, const char *szUrl)
 
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, buffer);
 	curl_easy_setopt(curl, CURLOPT_URL, szUrl);
-	curl_easy_perform(curl);
+	result = curl_easy_perform(curl);
+	if (result != CURLE_OK) {
+		return 0;
+	}
+
+	result = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
+	if (result != CURLE_OK) {
+		return 0;
+	}
+
+	if (responseCode != 200) {
+		return 0;
+	}
+
+	return 1;
 }
 
 
