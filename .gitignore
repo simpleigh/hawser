@@ -5,6 +5,8 @@ build-aux/
 .project
 .settings
 
+*.o
+
 aclocal.m4
 config.h
 config.h.in

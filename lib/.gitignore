@@ -1,6 +1,3 @@
 !config.h
 
-*.o
 libhawser.a
-Makefile
-Makefile.in
