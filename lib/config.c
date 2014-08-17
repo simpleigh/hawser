@@ -8,7 +8,7 @@ Config config = {
 	"",   /* szAccessKeyId     */
 	"",   /* szSecretAccessKey */
 	NULL, /* szToken           */
-	0,    /* fIamRole          */
+	0,    /* fUseMetadata      */
 	0     /* fDebug            */
 };
 
@@ -88,9 +88,9 @@ config_set_token(const char *szInput)
 }
 
 void
-config_set_iam_role(__attribute__((unused)) const char *szInput)
+config_set_use_metadata(__attribute__((unused)) const char *szInput)
 {
-	config.fIamRole = 1;
+	config.fUseMetadata = 1;
 }
 
 void
@@ -107,7 +107,7 @@ config_load(int argc, char **argv)
 	config_load_environment();
 	config_load_arguments(argc, argv);
 
-	if (config.fIamRole) {
+	if (config.fUseMetadata) {
 		config_load_iam();
 	}
 }
