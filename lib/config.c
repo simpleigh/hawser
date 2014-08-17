@@ -3,50 +3,53 @@
 #include "config.h"
 
 Config config = {
-	"", /* access_key_id     */
-	"", /* secret_access_key */
-	0,  /* iam_role          */
-	0   /* debug             */
+	"", /* szAccessKeyId     */
+	"", /* szSecretAccessKey */
+	0,  /* fIamRole          */
+	0   /* fDebug            */
 };
 
-void
-config_set(char *dest, const char *src, size_t len)
+static void
+config_set(char *szDestination, const char *szInput, size_t cbExpected)
 {
-	if (src == NULL) {
+	const char *pchNil;
+
+	if (szInput == NULL) {
 		return;
 	}
 
 	/* Check length. */
-	if ((const char *)memchr(src, '\0', len + 1) != src + len) {
+	pchNil = (const char *)memchr(szInput, '\0', cbExpected + 1);
+	if (pchNil != szInput + cbExpected) {
 		return;
 	}
 
-	memcpy(dest, src, len);
-	dest[len] = '\0';
+	memcpy(szDestination, szInput, cbExpected);
+	szDestination[cbExpected] = '\0';
 }
 
 void
-config_set_access_key_id(const char *src)
+config_set_access_key_id(const char *szInput)
 {
-	config_set(config.access_key_id, src, 20);
+	config_set(config.szAccessKeyId, szInput, 20);
 }
 
 void
-config_set_secret_access_key(const char *src)
+config_set_secret_access_key(const char *szInput)
 {
-	config_set(config.secret_access_key, src, 40);
+	config_set(config.szSecretAccessKey, szInput, 40);
 }
 
 void
-config_set_iam_role(__attribute__((unused)) const char *src)
+config_set_iam_role(__attribute__((unused)) const char *szInput)
 {
-	config.iam_role = 1;
+	config.fIamRole = 1;
 }
 
 void
-config_set_debug(__attribute__((unused)) const char *src)
+config_set_debug(__attribute__((unused)) const char *szInput)
 {
-	config.debug = 1;
+	config.fDebug = 1;
 }
 
 void
@@ -57,7 +60,7 @@ config_load(int argc, char **argv)
 	config_load_environment();
 	config_load_arguments(argc, argv);
 
-	if (config.iam_role) {
+	if (config.fIamRole) {
 		config_load_iam();
 	}
 }

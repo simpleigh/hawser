@@ -4,7 +4,7 @@
 #include "../config.h"
 
 typedef struct EnvironmentVariable {
-	const char *name;
+	const char *szName;
 	void (*store)(const char *);
 } EnvironmentVariable;
 
@@ -15,18 +15,20 @@ typedef struct EnvironmentVariable {
 static const EnvironmentVariable ENVIRONMENT_VARIABLES[] = {
 	{ "AWS_ACCESS_KEY_ID",     config_set_access_key_id     },
 	{ "AWS_SECRET_ACCESS_KEY", config_set_secret_access_key },
-	{ NULL,                    NULL                              }
+	{ NULL,                    NULL                         }
 };
 
 void
 config_load_environment()
 {
-	const EnvironmentVariable *variable = ENVIRONMENT_VARIABLES;
-	char *value;
+	const EnvironmentVariable *pVariable = ENVIRONMENT_VARIABLES;
+	char *szValue;
 
-	while (variable->name) {
-		value = getenv(variable->name);
-		variable->store(value);
-		variable++;
+	while (pVariable->szName) {
+		szValue = getenv(pVariable->szName);
+		if (szValue) {
+			pVariable->store(szValue);
+		}
+		pVariable++;
 	}
 }

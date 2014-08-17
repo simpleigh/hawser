@@ -163,4 +163,3 @@ buffer_destroy(BUFFER *buffer)
 	}
 	free(buffer);
 }
-

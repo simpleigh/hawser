@@ -8,9 +8,9 @@
 #define LINE_BUFFER 200
 
 typedef struct FileEntry {
-	const char * const name;
-	const char * const pattern;
-	regex_t *compiled;
+	const char * const szParameter;
+	const char * const szRegex;
+	regex_t *pRegexCompiled;
 	void (* const store)(const char *);
 } FileEntry;
 
@@ -35,72 +35,81 @@ static FileEntry FILE_ENTRIES[] = {
 	}
 };
 
-static void compile_regexes(FileEntry *fileEntry);
-static void free_regexes(FileEntry *fileEntry);
-static void free_regex(FileEntry *fileEntry);
+static void compile_regexes(FileEntry *pFileEntry);
+static void free_regexes(FileEntry *pFileEntry);
 
 void
-config_load_file(const char *filename)
+config_load_file(const char *szFilename)
 {
-	FileEntry *fileEntry;
-	FILE *stream = fopen(filename, "r");
+	FILE *pStream = fopen(szFilename, "r");
 	char szLine[LINE_BUFFER];
+	FileEntry *pFileEntry;
+	int result;
+	regmatch_t pMatches[2];
 
-	printf("Loading %s\n", filename);
+	printf("Loading %s\n", szFilename);
 
-	if (!stream) {
+	if (!pStream) {
 		return;
 	}
 
 	compile_regexes(FILE_ENTRIES);
 
-	while (fgets(szLine, LINE_BUFFER, stream)) {
-		fileEntry = FILE_ENTRIES;
-		while (fileEntry->name) {
-			regmatch_t matchptr[2];
-			if (fileEntry->compiled) {
-				if (regexec(fileEntry->compiled, szLine, 2, matchptr, 0) == 0) {
-					szLine[matchptr[1].rm_eo] = '\0';
-					fileEntry->store(szLine + matchptr[1].rm_so);
-				}
+	while (fgets(szLine, LINE_BUFFER, pStream)) {
+		pFileEntry = FILE_ENTRIES;
+		while (pFileEntry->szParameter) {
+			result = regexec(
+				pFileEntry->pRegexCompiled,            /* preg   */
+				szLine,                                /* string */
+				sizeof(pMatches) / sizeof(regmatch_t), /* nmatch */
+				pMatches,                              /* pmatch */
+				0                                      /* eflags */
+			);
+
+			if (result == 0) {
+				/* Insert null at end of match. */
+				szLine[pMatches[1].rm_eo] = '\0';
+				pFileEntry->store(szLine + pMatches[1].rm_so);
 			}
-			fileEntry++;
+
+			pFileEntry++;
 		}
 	}
 
 	free_regexes(FILE_ENTRIES);
 
-	fclose(stream);
+	fclose(pStream);
 }
 
 static void
 compile_regexes(FileEntry *fileEntry)
 {
-	BUFFER *buffer;
+	BUFFER *bufRegex;
 	int result;
 
-	while (fileEntry->name) {
-		buffer = buffer_create();
-		buffer_append(buffer, "^[ \t]*");
-		buffer_append(buffer, fileEntry->name);
-		buffer_append(buffer, "[ \t]*=[ \t]*(");
-		buffer_append(buffer, fileEntry->pattern);
-		buffer_append(buffer, ")[ \t]*");
+	while (fileEntry->szParameter) {
+		bufRegex = buffer_create();
+		buffer_append(bufRegex, "^[ \t]*");
+		buffer_append(bufRegex, fileEntry->szParameter);
+		buffer_append(bufRegex, "[ \t]*=[ \t]*(");
+		buffer_append(bufRegex, fileEntry->szRegex);
+		buffer_append(bufRegex, ")[ \t]*");
 
-		fileEntry->compiled = malloc(sizeof(regex_t));
-		if (fileEntry->compiled) {
-			result = regcomp(
-				fileEntry->compiled,
-				buffer_data(buffer),
-				REG_EXTENDED
-			);
-
-			if (result) {
-				free_regex(fileEntry);
-			}
+		fileEntry->pRegexCompiled = malloc(sizeof(regex_t));
+		if (!fileEntry->pRegexCompiled) {
+			exit(EXIT_FAILURE);
 		}
 
-		buffer_destroy(buffer);
+		result = regcomp(
+			fileEntry->pRegexCompiled,
+			buffer_data(bufRegex),
+			REG_EXTENDED
+		);
+		if (result) {
+			exit(EXIT_FAILURE);
+		}
+
+		buffer_destroy(bufRegex);
 		fileEntry++;
 	}
 }
@@ -108,20 +117,14 @@ compile_regexes(FileEntry *fileEntry)
 static void
 free_regexes(FileEntry *fileEntry)
 {
-	while (fileEntry->name) {
-		if (fileEntry->compiled) {
-			free_regex(fileEntry);
+	while (fileEntry->szParameter) {
+		if (fileEntry->pRegexCompiled) {
+			regfree(fileEntry->pRegexCompiled);
+			free(fileEntry->pRegexCompiled);
+			fileEntry->pRegexCompiled = NULL;
 		}
 		fileEntry++;
 	}
-}
-
-static void
-free_regex(FileEntry *fileEntry)
-{
-	regfree(fileEntry->compiled);
-	free(fileEntry->compiled);
-	fileEntry->compiled = NULL;
 }
 
 #undef LINE_BUFFER

@@ -10,16 +10,15 @@
 void
 config_load_user_file()
 {
-	uid_t uid = getuid();
-	struct passwd *pw = getpwuid(uid);
-	BUFFER *buffer;
+	struct passwd *pPasswd = getpwuid(getuid());
+	BUFFER *bufFilename;
 
-	if (!pw || !pw->pw_dir) {
+	if (!pPasswd || !pPasswd->pw_dir) {
 		return;
 	}
 
-	buffer = buffer_from(pw->pw_dir);
-	buffer_append(buffer, "/.hawser");
-	config_load_file(buffer_data(buffer));
-	buffer_destroy(buffer);
+	bufFilename = buffer_from(pPasswd->pw_dir);
+	buffer_append(bufFilename, "/.hawser");
+	config_load_file(buffer_data(bufFilename));
+	buffer_destroy(bufFilename);
 }

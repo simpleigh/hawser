@@ -3,7 +3,7 @@
 
 #include "../config.h"
 
-const struct option GETOPT_OPTIONS[] = {
+static const struct option GETOPT_OPTIONS[] = {
 	{ "access-key-id",     required_argument, NULL, 0 },
 	{ "secret-access-key", required_argument, NULL, 0 },
 	{ "iam-role",          no_argument,       NULL, 0 },
@@ -13,7 +13,7 @@ const struct option GETOPT_OPTIONS[] = {
 
 /* Array of const pointers to functions. */
 /* Should line up with GETOPT_OPTIONS. */
-void (* const STORES[])(const char *) = {
+static void (* const STORES[])(const char *) = {
 	config_set_access_key_id,
 	config_set_secret_access_key,
 	config_set_iam_role,

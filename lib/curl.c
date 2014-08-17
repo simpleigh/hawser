@@ -11,16 +11,16 @@ static size_t
 curl_write(char *ptr, size_t size, size_t nmemb, void *userdata)
 {
 	size_t bytes = size * nmemb;
-	BUFFER *buffer = (BUFFER *)userdata;
+	BUFFER *bufDestination = (BUFFER *)userdata;
 
-	buffer_nappend(buffer, ptr, bytes);
+	buffer_nappend(bufDestination, ptr, bytes);
 
 	return bytes;
 }
 
 
 unsigned int
-curl_get(BUFFER *buffer, const char *szUrl)
+curl_get(BUFFER *bufDestination, const char *szUrl)
 {
 	CURLcode result;
 	long responseCode;
@@ -33,7 +33,7 @@ curl_get(BUFFER *buffer, const char *szUrl)
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curl_write);
 	}
 
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, buffer);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, bufDestination);
 	curl_easy_setopt(curl, CURLOPT_URL, szUrl);
 	result = curl_easy_perform(curl);
 	if (result != CURLE_OK) {
