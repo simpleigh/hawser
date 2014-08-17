@@ -6,6 +6,7 @@
 int main(int argc, char **argv)
 {
 	config_load(argc, argv);
+	printf("Region: %s\n",            config.szRegion);
 	printf("Access Key ID: %s\n",     config.szAccessKeyId);
 	printf("Secret access key: %s\n", config.szSecretAccessKey);
 	if (config.bufToken) {

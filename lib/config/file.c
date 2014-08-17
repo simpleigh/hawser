@@ -16,6 +16,12 @@ typedef struct FileEntry {
 
 static FileEntry FILE_ENTRIES[] = {
 	{
+		"region",
+		"[a-z1-9\\-]+",
+		NULL,
+		config_set_region
+	},
+	{
 		"access_key_id",
 		"[^ \t]{20}",
 		NULL,

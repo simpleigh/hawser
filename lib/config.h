@@ -4,6 +4,7 @@
 #include "buffer.h"
 
 typedef struct Config {
+	const char *szRegion;
 	char szAccessKeyId[21];
 	char szSecretAccessKey[41];
 	BUFFER *bufToken;
@@ -13,6 +14,7 @@ typedef struct Config {
 
 extern Config config;
 
+void config_set_region(const char *szInput);
 void config_set_access_key_id(const char *szInput);
 void config_set_secret_access_key(const char *szInput);
 void config_set_token(const char *szInput);

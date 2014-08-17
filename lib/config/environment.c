@@ -13,6 +13,7 @@ typedef struct EnvironmentVariable {
  * Maps possible environment variables to the functions used to store them.
  */
 static const EnvironmentVariable ENVIRONMENT_VARIABLES[] = {
+	{ "AWS_REGION",            config_set_region            },
 	{ "AWS_ACCESS_KEY_ID",     config_set_access_key_id     },
 	{ "AWS_SECRET_ACCESS_KEY", config_set_secret_access_key },
 	{ NULL,                    NULL                         }

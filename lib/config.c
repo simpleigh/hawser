@@ -4,6 +4,7 @@
 #include "config.h"
 
 Config config = {
+	NULL, /* szRegion          */
 	"",   /* szAccessKeyId     */
 	"",   /* szSecretAccessKey */
 	NULL, /* szToken           */
@@ -28,6 +29,36 @@ config_set(char *szDestination, const char *szInput, size_t cbExpected)
 
 	memcpy(szDestination, szInput, cbExpected);
 	szDestination[cbExpected] = '\0';
+}
+
+static const char * const REGIONS[] = {
+	"us-east-1",
+	"us-west-2",
+	"us-west-1",
+	"eu-west-1",
+	"ap-southeast-1",
+	"ap-southeast-2",
+	"ap-northeast-1",
+	"sa-east-1",
+	NULL
+};
+
+void
+config_set_region(const char *szInput)
+{
+	size_t iRegions = 0;
+
+	if (szInput == NULL) {
+		return;
+	}
+
+	while (REGIONS[iRegions]) {
+		if (strcmp(szInput, REGIONS[iRegions]) == 0) {
+			config.szRegion = REGIONS[iRegions];
+			return;
+		}
+		iRegions++;
+	}
 }
 
 void
