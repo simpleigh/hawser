@@ -11,7 +11,7 @@ BUFFER *buffer_from(const char *szString);
 BUFFER *buffer_nfrom(const char *szString, size_t cbString);
 
 size_t buffer_len(const BUFFER *buffer);
-char * buffer_data(const BUFFER *buffer);
+const char * buffer_data(const BUFFER *buffer);
 
 size_t buffer_append(BUFFER *buffer, const char *szString);
 size_t buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString);

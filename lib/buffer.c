@@ -76,7 +76,7 @@ buffer_len(const BUFFER *buffer)
 }
 
 
-char *
+const char *
 buffer_data(const BUFFER *buffer)
 {
 	if (!buffer) {
