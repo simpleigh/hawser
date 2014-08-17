@@ -4,7 +4,7 @@
 #include "../buffer.h"
 #include "../curl.h"
 
-static const char const URL_ROOT[] =
+static const char * const URL_ROOT =
 	"http://instance-data/latest/meta-data/iam/security-credentials/";
 
 void

@@ -3,11 +3,11 @@
 
 #include "buffer.h"
 
-typedef struct BUFFER {
+struct BUFFER {
 	size_t cbBuffer;
 	size_t cbContents;
 	char *szBuffer;
-} BUFFER;
+};
 
 static const size_t DEFAULT_BUFFER_SIZE = 1024;
 
