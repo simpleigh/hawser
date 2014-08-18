@@ -41,7 +41,7 @@ buffer_from(const char *szString)
 BUFFER *
 buffer_nfrom(const char *szString, size_t cbString)
 {
-	BUFFER *buffer = malloc(sizeof(buffer));
+	BUFFER *buffer = malloc(sizeof(BUFFER));
 	size_t cbBuffer;
 
 	if (!buffer) {
