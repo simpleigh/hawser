@@ -23,13 +23,13 @@ static FileEntry FILE_ENTRIES[] = {
 	},
 	{
 		"access_key_id",
-		"[^ \t]{20}",
+		"[A-Z0-9]{20}",
 		NULL,
 		config_set_access_key_id
 	},
 	{
 		"secret_access_key",
-		"[^ \t]{40}",
+		"[A-Za-z0-9+/]{40}",
 		NULL,
 		config_set_secret_access_key
 	},

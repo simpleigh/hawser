@@ -26,11 +26,11 @@ typedef struct IamEntry {
 } IamEntry;
 
 static const IamEntry IAM_ENTRIES[] = {
-	{ "Code",            "[A-Za-z]+",       &credentials.bufCode            },
-	{ "AccessKeyId",     "[^\"]{20}",       &credentials.bufAccessKeyId     },
-	{ "SecretAccessKey", "[^\"]{40}",       &credentials.bufSecretAccessKey },
-	{ "Token",           "[A-Za-z0-9+/=]+", &credentials.bufToken           },
-	{ NULL,              NULL,              NULL                            }
+	{ "Code",            "[A-Za-z]+",         &credentials.bufCode            },
+	{ "AccessKeyId",     "[A-Z0-9]{20}",      &credentials.bufAccessKeyId     },
+	{ "SecretAccessKey", "[A-Za-z0-9+/]{40}", &credentials.bufSecretAccessKey },
+	{ "Token",           "[A-Za-z0-9+/=]+",   &credentials.bufToken           },
+	{ NULL,              NULL,                NULL                            }
 };
 
 static void process_entry(const IamEntry *pIamEntry, BUFFER *bufResponse);
