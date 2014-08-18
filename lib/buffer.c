@@ -7,6 +7,7 @@ struct BUFFER {
 	size_t cbBuffer;
 	size_t cbContents;
 	char *szBuffer;
+	char *szContents;
 };
 
 static const size_t DEFAULT_BUFFER_SIZE = 1024;
@@ -26,7 +27,8 @@ buffer_create(void)
 
 	buffer->cbBuffer = DEFAULT_BUFFER_SIZE;
 	buffer->cbContents = 0;
-	buffer->szBuffer[0] = '\0';
+	buffer->szContents = buffer->szBuffer;
+	buffer->szContents[buffer->cbContents] = '\0';
 
 	return buffer;
 }
@@ -57,10 +59,11 @@ buffer_nfrom(const char *szString, size_t cbString)
 		exit(EXIT_FAILURE);
 	}
 
-	memcpy(buffer->szBuffer, szString, cbString);
 	buffer->cbBuffer = cbBuffer;
 	buffer->cbContents = cbString;
-	buffer->szBuffer[cbString] = '\0';
+	buffer->szContents = buffer->szBuffer;
+	buffer->szContents[cbString] = '\0';
+	memcpy(buffer->szContents, szString, cbString);
 
 	return buffer;
 }
@@ -83,7 +86,7 @@ buffer_data(const BUFFER *buffer)
 		exit(EXIT_FAILURE);
 	}
 
-	return buffer->szBuffer;
+	return buffer->szContents;
 }
 
 
@@ -98,9 +101,13 @@ buffer_append(BUFFER *buffer, const char *szString)
 size_t
 buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString)
 {
+	size_t dContents;
+
 	if (!buffer || !buffer->szBuffer) {
 		exit(EXIT_FAILURE);
 	}
+
+	dContents = buffer->szContents - buffer->szBuffer;
 
 	if (buffer->cbBuffer - buffer->cbContents <= cbString) {
 		/* TODO: cope with integer overflow here */
@@ -112,11 +119,12 @@ buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString)
 		if (!buffer->szBuffer) {
 			exit(EXIT_FAILURE);
 		}
+		buffer->szContents = buffer->szBuffer + dContents;
 	}
 
-	memcpy(buffer->szBuffer + buffer->cbContents, szString, cbString);
+	memcpy(buffer->szContents + buffer->cbContents, szString, cbString);
 	buffer->cbContents = buffer->cbContents + cbString;
-	*(buffer->szBuffer + buffer->cbContents) = '\0';
+	*(buffer->szContents + buffer->cbContents) = '\0';
 
 	return buffer->cbContents;
 }
@@ -147,7 +155,8 @@ buffer_clear(BUFFER *buffer)
 	}
 
 	buffer->cbContents = 0;
-	buffer->szBuffer[0] = '\0';
+	buffer->szContents = buffer->szBuffer;
+	buffer->szContents[buffer->cbContents] = '\0';
 }
 
 
