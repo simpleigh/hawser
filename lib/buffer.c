@@ -160,6 +160,35 @@ buffer_clear(BUFFER *buffer)
 }
 
 
+size_t
+buffer_substr(BUFFER *buffer, int ibStart, int cbLength)
+{
+	if (!buffer || !buffer->szBuffer) {
+		exit(EXIT_FAILURE);
+	}
+
+	if (ibStart < 0 && (size_t)(-ibStart) < buffer->cbContents) {
+		ibStart = buffer->cbContents + ibStart;
+	}
+
+	if (ibStart > 0 && (size_t)ibStart < buffer->cbContents) {
+		buffer->cbContents = buffer->cbContents - ibStart;
+		buffer->szContents = buffer->szContents + ibStart;
+	}
+
+	if (cbLength < 0 && (size_t)(-cbLength) < buffer->cbContents) {
+		cbLength = buffer->cbContents + cbLength;
+	}
+
+	if (cbLength > 0 && (size_t)cbLength < buffer->cbContents) {
+		buffer->cbContents = cbLength;
+		buffer->szContents[buffer->cbContents] = '\0';
+	}
+
+	return buffer->cbContents;
+}
+
+
 void
 buffer_destroy(BUFFER *buffer)
 {

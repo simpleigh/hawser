@@ -17,6 +17,8 @@ config_load_region(void)
 		return;
 	}
 
+	buffer_substr(bufResponse, 0, -1);
+
 	config_set_region(buffer_data(bufResponse));
 
 	buffer_destroy(bufResponse);

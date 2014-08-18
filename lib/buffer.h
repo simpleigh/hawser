@@ -17,6 +17,8 @@ size_t buffer_append(BUFFER *buffer, const char *szString);
 size_t buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString);
 size_t buffer_append_line(BUFFER *buffer, const char *szString);
 
+size_t buffer_substr(BUFFER *buffer, int ibStart, int cbLength);
+
 void buffer_clear(BUFFER *buffer);
 void buffer_destroy(BUFFER *buffer);
 
