@@ -108,6 +108,7 @@ config_load(int argc, char **argv)
 	config_load_arguments(argc, argv);
 
 	if (config.fUseMetadata) {
+		config_load_region();
 		config_load_iam();
 	}
 }

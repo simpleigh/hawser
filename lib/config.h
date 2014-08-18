@@ -23,9 +23,10 @@ void config_set_debug(const char *szInput);
 
 void config_load(int argc, char **argv);
 void config_load_file(const char *szFilename);
-void config_load_user_file();
-void config_load_environment();
+void config_load_user_file(void);
+void config_load_environment(void);
 void config_load_arguments(int argc, char **argv);
-void config_load_iam();
+void config_load_iam(void);
+void config_load_region(void);
 
 #endif /* __CONFIG_H */
