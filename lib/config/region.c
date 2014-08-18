@@ -17,5 +17,7 @@ config_load_region(void)
 		return;
 	}
 
-	printf("%s", buffer_data(bufResponse));
+	config_set_region(buffer_data(bufResponse));
+
+	buffer_destroy(bufResponse);
 }
