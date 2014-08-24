@@ -9,6 +9,7 @@ AM_INIT_AUTOMAKE([subdir-objects foreign -Wall -Werror])
 AC_PROG_CC
 AC_PROG_RANLIB
 AM_PROG_AR
+AM_PROG_CC_C_O
 
 # Checks for libraries.
 LIBCURL_CHECK_CONFIG([yes], [7.10.8])
