@@ -9,6 +9,7 @@ static const struct option GETOPT_OPTIONS[] = {
 	{ "secret-access-key", required_argument, NULL, 0 },
 	{ "use-metadata",      no_argument,       NULL, 0 },
 	{ "debug",             no_argument,       NULL, 0 },
+	{ "instance-id",       required_argument, NULL, 0 },
 	{ NULL,                0,                 NULL, 0 }
 };
 
@@ -19,7 +20,8 @@ static void (* const STORES[])(const char *) = {
 	config_set_access_key_id,
 	config_set_secret_access_key,
 	config_set_use_metadata,
-	config_set_debug
+	config_set_debug,
+	config_set_instance_id
 };
 
 void

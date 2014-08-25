@@ -10,6 +10,7 @@ typedef struct Config {
 	BUFFER *bufToken;
 	int unsigned fUseMetadata;
 	int unsigned fDebug;
+	char szInstanceId[11];
 } Config;
 
 extern Config config;
@@ -20,6 +21,7 @@ void config_set_secret_access_key(const char *szInput);
 void config_set_token(const char *szInput);
 void config_set_use_metadata(const char *szInput);
 void config_set_debug(const char *szInput);
+void config_set_instance_id(const char *szInput);
 
 void config_load(int argc, char **argv);
 void config_load_file(const char *szFilename);

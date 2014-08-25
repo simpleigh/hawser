@@ -9,7 +9,8 @@ Config config = {
 	"",   /* szSecretAccessKey */
 	NULL, /* szToken           */
 	0,    /* fUseMetadata      */
-	0     /* fDebug            */
+	0,    /* fDebug            */
+	""    /* szInstanceId      */
 };
 
 static void
@@ -97,6 +98,12 @@ void
 config_set_debug(__attribute__((unused)) const char *szInput)
 {
 	config.fDebug = 1;
+}
+
+void
+config_set_instance_id(const char *szInput)
+{
+	config_set(config.szInstanceId, szInput, 10);
 }
 
 void
