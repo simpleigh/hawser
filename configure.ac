@@ -20,6 +20,11 @@ LIBCURL_CHECK_CONFIG(
 	[AC_MSG_ERROR([Cannot find libcurl: aborting.])]
 )
 
+AX_CHECK_OPENSSL(
+	[],
+	[AC_MSG_ERROR([Cannot find OpenSSL: aborting.])]
+)
+
 # Checks for header files.
 AC_CHECK_HEADERS([stddef.h stdlib.h string.h unistd.h])
 
