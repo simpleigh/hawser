@@ -13,10 +13,12 @@ AM_PROG_AR
 AM_PROG_CC_C_O
 
 # Checks for libraries.
-LIBCURL_CHECK_CONFIG([yes], [7.10.8])
-if test "$HAVE_LIBCURL" = :; then
-	AC_MSG_ERROR([Cannot find libcurl: aborting.])
-fi
+LIBCURL_CHECK_CONFIG(
+	[yes],
+	[7.10.8],
+	[],
+	[AC_MSG_ERROR([Cannot find libcurl: aborting.])]
+)
 
 # Output files.
 AC_CONFIG_HEADERS([config.h])
