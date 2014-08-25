@@ -9,3 +9,5 @@ bin_PROGRAMS = creds ec2
 creds_SOURCES = creds.c
 
 ec2_SOURCES = ec2.c
+ec2_LDADD = ../lib/libhawser.a @OPENSSL_LDFLAGS@ @OPENSSL_LIBS@ @LIBCURL@
+ec2_INCLUDES = @OPENSSL_INCLUDES@
