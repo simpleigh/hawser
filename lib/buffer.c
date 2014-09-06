@@ -101,7 +101,7 @@ buffer_append(BUFFER *buffer, const char *szString)
 size_t
 buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString)
 {
-	size_t dContents;
+	ptrdiff_t dContents;
 
 	if (!buffer || !buffer->szBuffer) {
 		exit(EXIT_FAILURE);
@@ -109,9 +109,9 @@ buffer_nappend(BUFFER *buffer, const char *szString, size_t cbString)
 
 	dContents = buffer->szContents - buffer->szBuffer;
 
-	if (buffer->cbBuffer - buffer->cbContents <= cbString) {
+	if (buffer->cbBuffer - buffer->cbContents - dContents <= cbString) {
 		/* TODO: cope with integer overflow here */
-		size_t cbTarget = buffer->cbContents + cbString + 1;
+		size_t cbTarget = dContents + buffer->cbContents + cbString + 1;
 		while (buffer->cbBuffer < cbTarget) {
 			buffer->cbBuffer = buffer->cbBuffer * 2;
 		}
