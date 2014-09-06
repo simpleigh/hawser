@@ -3,7 +3,7 @@
 
 #include "buffer.h"
 
-struct BUFFER {
+struct buffer {
 	size_t cbBuffer;
 	size_t cbContents;
 	char *szBuffer;

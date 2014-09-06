@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-typedef struct BUFFER BUFFER;
+typedef struct buffer BUFFER;
 
 BUFFER *buffer_create(void);
 
