@@ -6,6 +6,7 @@
 
 int main(int argc, char **argv)
 {
+	const EVP_MD *sha256 = EVP_sha256();
 	char *key = "AWS4wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY";
 	char *date = "20110909";
 	char *region = "us-east-1";
@@ -20,7 +21,7 @@ int main(int argc, char **argv)
 	printf("Instance: %s\n", config.szInstanceId);
 
 	result = HMAC(
-		EVP_sha256(),
+		sha256,
 		(unsigned char *)key,
 		strlen(key),
 		(unsigned char *)date,
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
 	);
 
 	result = HMAC(
-		EVP_sha256(),
+		sha256,
 		result,
 		length,
 		(unsigned char *)region,
@@ -40,7 +41,7 @@ int main(int argc, char **argv)
 	);
 
 	result = HMAC(
-		EVP_sha256(),
+		sha256,
 		result,
 		length,
 		(unsigned char *)service,
@@ -50,7 +51,7 @@ int main(int argc, char **argv)
 	);
 
 	result = HMAC(
-		EVP_sha256(),
+		sha256,
 		result,
 		length,
 		(unsigned char *)end,
@@ -66,7 +67,7 @@ int main(int argc, char **argv)
 	printf("\n");
 
 	result = HMAC(
-		EVP_sha256(),
+		sha256,
 		result,
 		length,
 		(unsigned char *)string_to_sign,
