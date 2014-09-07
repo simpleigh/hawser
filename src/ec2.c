@@ -1,4 +1,6 @@
+#include "../lib/buffer.h"
 #include "../lib/config.h"
+#include "../lib/encodings.h"
 
 #include <openssl/hmac.h>
 #include <stdio.h>
@@ -16,6 +18,7 @@ int main(int argc, char **argv)
 	unsigned int length;
 	char *string_to_sign = "AWS4-HMAC-SHA256\n20110909T233600Z\n20110909/us-east-1/iam/aws4_request\n3511de7e95d28ecd39e9513b642aee07e54f4941150d8df8bf94b328ef7e55e2";
 	size_t i;
+	BUFFER *bufOut = buffer_create();
 
 	config_load(argc, argv);
 	printf("Instance: %s\n", config.szInstanceId);
@@ -77,10 +80,9 @@ int main(int argc, char **argv)
 	);
 
 	puts("Signature:");
-	for (i = 0; i < length; i++) {
-		printf("%x", result[i]);
-	}
-	printf("\n");
+	encode_base16(bufOut, (const char *)result, length);
+	puts(buffer_data(bufOut));
+	buffer_destroy(bufOut);
 
 	return 0;
 }
