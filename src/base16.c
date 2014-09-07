@@ -13,7 +13,7 @@ main(int argc, char *argv[])
 		exit(1);
 	}
 
-	encode_uri(buffer, argv[1]);
+	encode_base16(buffer, argv[1]);
 	puts(buffer_data(buffer));
 
 	buffer_destroy(buffer);
