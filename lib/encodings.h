@@ -3,7 +3,7 @@
 
 #include "buffer.h"
 
-void encode_base16(BUFFER *bufDestination, const char *szInput);
-void encode_uri(BUFFER *bufDestination, const char *szInput);
+void encode_base16(BUFFER *bufDestination, const char *szInput, size_t cbInput);
+void encode_uri(BUFFER *bufDestination, const char *szInput, size_t cbInput);
 
 #endif /* __ENCODINGS_H */

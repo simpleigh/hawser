@@ -10,26 +10,29 @@ static const char
 BASE16[] = "0123456789abcdef";
 
 void
-encode_base16(BUFFER *bufDestination, const char *szInput)
+encode_base16(BUFFER *bufDestination, const char *szInput, size_t cbInput)
 {
+	size_t ibInput;
 	unsigned char c;
 	char encoded[2];
 
-	while ((c = *szInput) != '\0') {
+	for (ibInput = 0; ibInput < cbInput; ibInput++) {
+		c = szInput[ibInput];
 		encoded[0] = BASE16[c >> 4];
 		encoded[1] = BASE16[c & 0xF];
 		buffer_nappend(bufDestination, encoded, 2);
-		szInput++;
 	}
 }
 
 void
-encode_uri(BUFFER *bufDestination, const char *szInput)
+encode_uri(BUFFER *bufDestination, const char *szInput, size_t cbInput)
 {
+	size_t ibInput;
 	unsigned char c;
 	char encoded[4]; /* '%' 'x' 'x' '\0' */
 
-	while ((c = *szInput) != '\0') {
+	for (ibInput = 0; ibInput < cbInput; ibInput++) {
+		c = szInput[ibInput];
 		if (FALSE
 			|| (c >= 'A' && c <= 'Z')
 			|| (c >= 'a' && c <= 'z')
@@ -44,7 +47,5 @@ encode_uri(BUFFER *bufDestination, const char *szInput)
 			sprintf(encoded, "%%%2x", c);
 			buffer_nappend(bufDestination, encoded, 3);
 		}
-
-		szInput++;
 	}
 }
