@@ -4,10 +4,13 @@ LDADD = ../lib/libhawser.a @LIBCURL@
 
 AC_CPPFLAGS = @LIBCURL_CPPFLAGS@
 
-bin_PROGRAMS = creds ec2
+bin_PROGRAMS = creds ec2 uriencode
 
 creds_SOURCES = creds.c
 
 ec2_SOURCES = ec2.c
 ec2_LDADD = ../lib/libhawser.a @OPENSSL_LDFLAGS@ @OPENSSL_LIBS@ @LIBCURL@
 ec2_INCLUDES = @OPENSSL_INCLUDES@
+
+uriencode_SOURCES = uriencode.c
+uriencode_LDADD = ../lib/libhawser.a

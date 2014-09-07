@@ -15,4 +15,6 @@ libhawser_a_SOURCES = buffer.h             \
                       config/region.c      \
                       config/user-file.c   \
                       curl.h               \
-                      curl.c
+                      curl.c               \
+                      encodings.h          \
+                      encodings.c
