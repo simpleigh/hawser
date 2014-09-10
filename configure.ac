@@ -25,6 +25,8 @@ AX_CHECK_OPENSSL(
 	[AC_MSG_ERROR([Cannot find OpenSSL: aborting.])]
 )
 
+PKG_CHECK_MODULES([CHECK], [check >= 0.9.8])
+
 # Checks for header files.
 AC_CHECK_HEADERS([stddef.h stdlib.h string.h unistd.h])
 
@@ -40,5 +42,6 @@ AC_CHECK_FUNCS([memchr regcomp])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile
                  lib/Makefile
-                 src/Makefile])
+                 src/Makefile
+                 tests/Makefile])
 AC_OUTPUT
