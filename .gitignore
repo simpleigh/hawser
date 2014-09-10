@@ -3,6 +3,7 @@
 .settings
 
 .deps/
+.dirstamp
 *.o
 Makefile
 Makefile.in
