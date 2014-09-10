@@ -6,6 +6,7 @@ AM_CFLAGS = -Wall -Wextra -std=c89 -pedantic -Werror
 noinst_LIBRARIES = libhawser.a
 
 libhawser_a_SOURCES = ../include/hawser/hawser.h \
+                      ../include/hawser/ec2.h    \
                       buffer.h                   \
                       buffer.c                   \
                       curl.h                     \
