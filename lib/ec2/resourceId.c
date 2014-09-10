@@ -48,21 +48,6 @@
 
 
 /**
- * Length (in bytes) of the ID part of an EC2 resource ID string.
- */
-#define ID_ID_LENGTH 8
-
-
-/**
- * An EC2 resource ID.
- */
-struct HAWSER_EC2_RESOURCE_ID {
-	HAWSER_EC2_RESOURCE_TYPE resourceType; /* Type of the resource. */
-	char id[ID_ID_LENGTH + 1];             /* Unique ID + '\0'.     */
-};
-
-
-/**
  * Type to hold various data about a resource type.
  */
 typedef struct {
@@ -99,13 +84,13 @@ static const RESOURCE_TYPE_ROW RESOURCE_TYPES[] = {
 /**
  * Minimum length (in bytes) of the tag part of a resource ID string.
  */
-#define TAG_MIN_LENGTH (ID_MIN_LENGTH - ID_ID_LENGTH - 2)
+#define TAG_MIN_LENGTH (ID_MIN_LENGTH - HAWSER_EC2_RESOURCE_ID_ID_LENGTH - 2)
 
 
 /**
  * Maximum length (in bytes) of the tag part of a resource ID string.
  */
-#define TAG_MAX_LENGTH (ID_MAX_LENGTH - ID_ID_LENGTH - 2)
+#define TAG_MAX_LENGTH (ID_MAX_LENGTH - HAWSER_EC2_RESOURCE_ID_ID_LENGTH - 2)
 
 
 /**
@@ -162,7 +147,7 @@ hawser_ec2_id_read(HAWSER_EC2_RESOURCE_ID *id, const char *string)
 		return HAWSER_INVALID;
 	}
 
-	if (cbString - cbTag - 1 /* '-' */ != ID_ID_LENGTH) {
+	if (cbString - cbTag - 1 /* '-' */ != HAWSER_EC2_RESOURCE_ID_ID_LENGTH) {
 		return HAWSER_INVALID;
 	}
 

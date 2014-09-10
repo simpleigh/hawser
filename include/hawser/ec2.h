@@ -44,17 +44,28 @@ typedef enum {
 
 
 /**
- * An EC2 resource ID.
- */
-typedef struct HAWSER_EC2_RESOURCE_ID HAWSER_EC2_RESOURCE_ID;
-
-
-/**
- * Number of bytes required to store an EC2 resource ID.
+ * Number of bytes required to store an EC2 resource ID string.
  *
  * Calculated as "subnet-12345678" plus terminating NULL byte.
  */
 #define HAWSER_EC2_RESOURCE_ID_STRING_LENGTH 16
+
+
+/**
+ * Number of bytes required to store the ID part of an EC2 resource ID string.
+ *
+ * DOES NOT INCLUDE terminating NULL byte.
+ */
+#define HAWSER_EC2_RESOURCE_ID_ID_LENGTH 8
+
+
+/**
+ * An EC2 resource ID.
+ */
+typedef struct {
+	HAWSER_EC2_RESOURCE_TYPE resourceType;         /* Type of the resource. */
+	char id[HAWSER_EC2_RESOURCE_ID_ID_LENGTH + 1]; /* Unique ID.            */
+} HAWSER_EC2_RESOURCE_ID;
 
 
 /**
