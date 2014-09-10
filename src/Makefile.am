@@ -1,9 +1,12 @@
+## Process this file with automake to produce Makefile.in
+
+# Global configuration
+AM_CPPFLAGS = -I../include
 AM_CFLAGS = -Wall -Wextra -std=c89 -pedantic -Werror
-
 LDADD = ../lib/libhawser.a @LIBCURL@
-
 AC_CPPFLAGS = @LIBCURL_CPPFLAGS@
 
+# Programs
 bin_PROGRAMS = creds ec2 uriencode base16
 
 creds_SOURCES = bin/creds.c          \
@@ -15,7 +18,6 @@ creds_SOURCES = bin/creds.c          \
                 config/iam.c         \
                 config/region.c      \
                 config/user-file.c
-
 
 ec2_SOURCES = bin/ec2.c
 ec2_LDADD = ../lib/libhawser.a @OPENSSL_LDFLAGS@ @OPENSSL_LIBS@ @LIBCURL@
