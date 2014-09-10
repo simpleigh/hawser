@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "../config.h"
-#include "../buffer.h"
+#include "../../lib/buffer.h"
 
 #define LINE_BUFFER 200
 

@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 #include "../config.h"
-#include "../buffer.h"
+#include "../../lib/buffer.h"
 
 void
 config_load_user_file()

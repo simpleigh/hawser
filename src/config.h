@@ -1,7 +1,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#include "buffer.h"
+#include "../lib/buffer.h"
 
 typedef struct Config {
 	const char *szRegion;

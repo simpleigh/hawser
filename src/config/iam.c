@@ -4,8 +4,8 @@
 #include <string.h>
 
 #include "../config.h"
-#include "../buffer.h"
-#include "../curl.h"
+#include "../../lib/buffer.h"
+#include "../../lib/curl.h"
 
 static const char * const URL_ROOT =
 	"http://instance-data/latest/meta-data/iam/security-credentials/";

@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 #include "../config.h"
-#include "../buffer.h"
-#include "../curl.h"
+#include "../../lib/buffer.h"
+#include "../../lib/curl.h"
 
 static const char * const URL =
 	"http://instance-data/latest/meta-data/placement/availability-zone";

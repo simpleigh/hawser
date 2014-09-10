@@ -6,7 +6,16 @@ AC_CPPFLAGS = @LIBCURL_CPPFLAGS@
 
 bin_PROGRAMS = creds ec2 uriencode base16
 
-creds_SOURCES = bin/creds.c
+creds_SOURCES = bin/creds.c          \
+                config.h             \
+                config.c             \
+                config/arguments.c   \
+                config/environment.c \
+                config/file.c        \
+                config/iam.c         \
+                config/region.c      \
+                config/user-file.c
+
 
 ec2_SOURCES = bin/ec2.c
 ec2_LDADD = ../lib/libhawser.a @OPENSSL_LDFLAGS@ @OPENSSL_LIBS@ @LIBCURL@

@@ -1,5 +1,5 @@
-#include "../lib/buffer.h"
-#include "../lib/config.h"
+#include "../../lib/buffer.h"
+#include "../config.h"
 
 #include <stdio.h>
 

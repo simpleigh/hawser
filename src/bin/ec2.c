@@ -1,12 +1,11 @@
 #include "../lib/buffer.h"
-#include "../lib/config.h"
 #include "../lib/encodings.h"
 
 #include <openssl/hmac.h>
 #include <stdio.h>
 #include <string.h>
 
-int main(int argc, char **argv)
+int main()
 {
 	const EVP_MD *sha256 = EVP_sha256();
 	char *key = "AWS4wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY";
@@ -19,9 +18,6 @@ int main(int argc, char **argv)
 	char *string_to_sign = "AWS4-HMAC-SHA256\n20110909T233600Z\n20110909/us-east-1/iam/aws4_request\n3511de7e95d28ecd39e9513b642aee07e54f4941150d8df8bf94b328ef7e55e2";
 	size_t i;
 	BUFFER *bufOut = buffer_create();
-
-	config_load(argc, argv);
-	printf("Instance: %s\n", config.szInstanceId);
 
 	result = HMAC(
 		sha256,
