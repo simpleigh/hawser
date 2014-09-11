@@ -174,7 +174,7 @@ ec2_ptoid(EC2_ID *id, const char *string)
 		return HAWSER_INVALID;
 	}
 
-	if (cbString - cbTag - 1 /* '-' */ != EC2_ID_ID_BYTES) {
+	if (cbString != cbTag + 1 + EC2_ID_ID_BYTES) { /* 1 byte for '-'. */
 		return HAWSER_INVALID;
 	}
 
