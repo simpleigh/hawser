@@ -34,16 +34,19 @@
 
 /**
  * Minimum length (in bytes) of an EC2 resource ID string.
+ *
+ * DOES NOT INCLUDE terminating NULL byte.
  */
-#define ID_MIN_LENGTH 11 /* "i-12345678\0" */
+#define ID_MIN_STRLEN 10 /* "i-12345678" */
 
 
 /**
  * Maximum length (in bytes) of an EC2 resource ID string.
  *
- * Based on EC2_ID_STRLEN defined in <hawser/ec2.h>.
+ * Based on EC2_ID_MAX_BYTES defined in <hawser/ec2.h>.
+ * DOES NOT INCLUDE terminating NULL byte.
  */
-#define ID_MAX_LENGTH EC2_ID_STRLEN
+#define ID_MAX_STRLEN (EC2_ID_MAX_BYTES - 1)
 
 
 /**
@@ -82,14 +85,18 @@ static const RT_ROW RESOURCE_TYPES[] = {
 
 /**
  * Minimum length (in bytes) of the tag part of a resource ID string.
+ *
+ * DOES NOT INCLUDE terminating NULL byte.
  */
-#define TAG_MIN_LENGTH (ID_MIN_LENGTH - EC2_ID_IDLEN - 2)
+#define TAG_MIN_STRLEN (ID_MIN_STRLEN - EC2_ID_ID_BYTES - 1)
 
 
 /**
  * Maximum length (in bytes) of the tag part of a resource ID string.
+ *
+ * DOES NOT INCLUDE terminating NULL byte.
  */
-#define TAG_MAX_LENGTH (ID_MAX_LENGTH - EC2_ID_IDLEN - 2)
+#define TAG_MAX_STRLEN (ID_MAX_STRLEN - EC2_ID_ID_BYTES - 1)
 
 
 /**
@@ -125,13 +132,13 @@ ec2_ptoid(EC2_ID *id, const char *string)
 	REQUIRE_NOT_NULL(string);
 
 	/* Check the length looks good. */
-	pNull = memchr(string, '\0', ID_MAX_LENGTH);
+	pNull = memchr(string, '\0', EC2_ID_MAX_BYTES);
 	if (!pNull) {
 		return HAWSER_INVALID;
 	}
 
 	cbString = pNull - string;
-	if (cbString < ID_MIN_LENGTH) {
+	if (cbString < ID_MIN_STRLEN) {
 		return HAWSER_INVALID;
 	}
 
@@ -142,11 +149,11 @@ ec2_ptoid(EC2_ID *id, const char *string)
 	}
 
 	cbTag = pHyphen - string;
-	if (cbTag < TAG_MIN_LENGTH || cbTag > TAG_MAX_LENGTH) {
+	if (cbTag < TAG_MIN_STRLEN || cbTag > TAG_MAX_STRLEN) {
 		return HAWSER_INVALID;
 	}
 
-	if (cbString - cbTag - 1 /* '-' */ != EC2_ID_IDLEN) {
+	if (cbString - cbTag - 1 /* '-' */ != EC2_ID_ID_BYTES) {
 		return HAWSER_INVALID;
 	}
 
@@ -175,7 +182,7 @@ ec2_ptoid(EC2_ID *id, const char *string)
 const char *
 ec2_idtop(char *string, const EC2_ID *id)
 {
-	static char internalOutput[ID_MAX_LENGTH];
+	static char internalOutput[EC2_ID_MAX_BYTES];
 	char *output = string ? string : internalOutput;
 
 	if (ec2_id_valid(id) == FALSE) {

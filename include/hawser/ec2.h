@@ -48,7 +48,7 @@ typedef enum {
  *
  * Calculated as "subnet-12345678" plus terminating NULL byte.
  */
-#define EC2_ID_STRLEN 16
+#define EC2_ID_MAX_BYTES 16
 
 
 /**
@@ -56,15 +56,15 @@ typedef enum {
  *
  * DOES NOT INCLUDE terminating NULL byte.
  */
-#define EC2_ID_IDLEN 8
+#define EC2_ID_ID_BYTES 8
 
 
 /**
  * An EC2 resource ID.
  */
 typedef struct {
-	EC2_RT resourceType;       /* Type of the resource. */
-	char id[EC2_ID_IDLEN + 1]; /* Unique ID.            */
+	EC2_RT resourceType;          /* Type of the resource. */
+	char id[EC2_ID_ID_BYTES + 1]; /* Unique ID.            */
 } EC2_ID;
 
 
@@ -75,7 +75,7 @@ typedef struct {
  * Returns HAWSER_INVALID if STRING cannot be parsed.
  *
  * STRING must be NULL-terminated, and this function will examine up to
- * EC2_ID_STRLEN bytes of STRING while looking for the terminating NULL.
+ * EC2_ID_MAX_BYTES bytes of STRING while looking for the terminating NULL.
  */
 HAWSERresult ec2_ptoid(EC2_ID *id, const char *string);
 
@@ -84,8 +84,8 @@ HAWSERresult ec2_ptoid(EC2_ID *id, const char *string);
  * Writes an EC2_ID struct as a string.
  *
  * It places the result in STRING, which should be at least
- * EC2_ID_STRLEN bytes in length.
- * If STRING is NULL then the result is placed in a static array.
+ * EC2_ID_MAX_BYTES bytes in length.
+ * If STRING is NULL then the result is placed in a static array instead.
  *
  * Returns a pointer to the parsed output, or NULL on error.
  */
