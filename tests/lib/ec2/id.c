@@ -22,7 +22,11 @@ const char * const INVALID_IDS[] = {
 	"1234567-12"        /* tag too long  */
 	"12-1234567",       /* ID too short  */
 	"1-123456789",      /* ID too long   */
-	"notag-12345678"    /* unknown tag   */
+	"notag-12345678",   /* unknown tag   */
+	"i-1234567/",       /* invalid char  */
+	"i-1234567:",       /* invalid char  */
+	"i-1234567`",       /* invalid char  */
+	"i-1234567g"        /* invalid char  */
 };
 
 START_TEST(test_read_errors)

@@ -100,6 +100,26 @@ static const RT_ROW RESOURCE_TYPES[] = {
 
 
 /**
+ * Checks whether ID characters are valid hex digits.
+ */
+static BOOL
+ec2_id_chars_valid(const char *id)
+{
+	size_t i;
+	char c;
+
+	for (i = 0; i < EC2_ID_ID_BYTES; i++) {
+		c = id[i];
+		if ((c < '0') || (c > '9' && c < 'a') || (c > 'f')) {
+			return FALSE;
+		}
+	}
+
+	return TRUE;
+}
+
+
+/**
  * Checks whether a HAWSER_EC2_RESOURCE_ID struct looks OK.
  */
 static BOOL
@@ -110,6 +130,7 @@ ec2_id_valid(const EC2_ID *id)
 		|| id->resourceType < EC2_RTMIN
 		|| id->resourceType > EC2_RTMAX
 		|| id->id[8] != '\0'
+		|| ec2_id_chars_valid(id->id) == FALSE
 	) {
 		return FALSE;
 	}
@@ -154,6 +175,11 @@ ec2_ptoid(EC2_ID *id, const char *string)
 	}
 
 	if (cbString - cbTag - 1 /* '-' */ != EC2_ID_ID_BYTES) {
+		return HAWSER_INVALID;
+	}
+
+	/* Check id characters are valid. */
+	if (ec2_id_chars_valid(pHyphen + 1) == FALSE) {
 		return HAWSER_INVALID;
 	}
 
