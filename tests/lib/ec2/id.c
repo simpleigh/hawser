@@ -15,12 +15,13 @@ START_TEST(test_read_error_if_pointers_null)
 END_TEST
 
 const char * const INVALID_IDS[] = {
-	"subnet-12345678a", /* too long      */
-	"i12345678",        /* no tag        */
-	"-12345678",        /* tag too short */
-	"subneta-1234567"   /* tag too long  */
-	"i-1234567",        /* ID too short  */
-	"i-123456789",      /* ID too long   */
+	"1234567890123456", /* too long      */
+	"123456789",        /* too short     */
+	"1234567890",       /* no hyphen     */
+	"-123456789",       /* tag too short */
+	"1234567-12"        /* tag too long  */
+	"12-1234567",       /* ID too short  */
+	"1-123456789",      /* ID too long   */
 	"notag-12345678"    /* unknown tag   */
 };
 
