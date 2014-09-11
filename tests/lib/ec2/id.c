@@ -6,23 +6,11 @@
 
 START_TEST(test_read_error_if_pointers_null)
 {
-	HAWSER_EC2_RESOURCE_ID resourceId;
+	EC2_ID id;
 	const char *string = "i-12345678";
 
-	ck_assert_int_eq(
-		HAWSER_NULL,
-		hawser_ec2_id_read(
-			(HAWSER_EC2_RESOURCE_ID *)NULL,
-			string
-		)
-	);
-	ck_assert_int_eq(
-		HAWSER_NULL,
-		hawser_ec2_id_read(
-			&resourceId,
-			(const char *)NULL
-		)
-	);
+	ck_assert_int_eq(HAWSER_NULL, ec2_ptoid((EC2_ID *)NULL, string));
+	ck_assert_int_eq(HAWSER_NULL, ec2_ptoid(&id, (const char *)NULL));
 }
 END_TEST
 
@@ -38,17 +26,17 @@ const char * const INVALID_IDS[] = {
 
 START_TEST(test_read_errors)
 {
-	HAWSER_EC2_RESOURCE_ID resourceId;
+	EC2_ID id;
 	const char *string = INVALID_IDS[_i];
 
-	ck_assert_int_eq(HAWSER_INVALID, hawser_ec2_id_read(&resourceId, string));
+	ck_assert_int_eq(HAWSER_INVALID, ec2_ptoid(&id, string));
 }
 END_TEST
 
 int
 main()
 {
-	Suite *s = suite_create("lib/ec2/resourceId");
+	Suite *s = suite_create("lib/ec2/id");
 	TCase *tc_core = tcase_create("Core");
 	SRunner *sr;
 	int number_failed;

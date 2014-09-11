@@ -13,6 +13,6 @@ libhawser_a_SOURCES = ../include/hawser/hawser.h \
                       buffer.c                   \
                       curl.h                     \
                       curl.c                     \
-                      ec2/resourceId.c           \
+                      ec2/id.c                   \
                       encodings.h                \
                       encodings.c

@@ -6,8 +6,8 @@ AM_CFLAGS = -Wall -Wextra -std=c89 -pedantic -Werror @CHECK_CFLAGS@
 LDADD = ../lib/libhawser.a @CHECK_LIBS@
 
 # CHECK target
-TESTS = test_lib_ec2_resourceId
+TESTS = lib_ec2_id
 
 check_PROGRAMS = $(TESTS)
 
-test_lib_ec2_resourceId_SOURCES = lib/ec2/resourceId.c
+lib_ec2_id_SOURCES = lib/ec2/id.c

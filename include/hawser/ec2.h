@@ -12,35 +12,35 @@ extern "C" {
  * Types of EC2 resource.
  */
 typedef enum {
-	HAWSER_EC2_CUSTOMER_GATEWAY = 0,
-	HAWSER_EC2_DHCP_OPTIONS,
-	HAWSER_EC2_IMAGE,
-	HAWSER_EC2_INSTANCE,
-	HAWSER_EC2_INTERNET_GATEWAY,
-	HAWSER_EC2_NETWORK_ACL,
-	HAWSER_EC2_NETWORK_INTERFACE,
-	HAWSER_EC2_ROUTE_TABLE,
-	HAWSER_EC2_SECURITY_GROUP,
-	HAWSER_EC2_SNAPSHOT,
-	HAWSER_EC2_SPOT_INSTANCES_REQUEST,
-	HAWSER_EC2_SUBNET,
-	HAWSER_EC2_VOLUME,
-	HAWSER_EC2_VPC,
-	HAWSER_EC2_VPN_CONNECTION,
-	HAWSER_EC2_VPN_GATEWAY
-} HAWSER_EC2_RESOURCE_TYPE;
+	EC2_CUSTOMER_GATEWAY = 0,
+	EC2_DHCP_OPTIONS,
+	EC2_IMAGE,
+	EC2_INSTANCE,
+	EC2_INTERNET_GATEWAY,
+	EC2_NETWORK_ACL,
+	EC2_NETWORK_INTERFACE,
+	EC2_ROUTE_TABLE,
+	EC2_SECURITY_GROUP,
+	EC2_SNAPSHOT,
+	EC2_SPOT_INSTANCES_REQUEST,
+	EC2_SUBNET,
+	EC2_VOLUME,
+	EC2_VPC,
+	EC2_VPN_CONNECTION,
+	EC2_VPN_GATEWAY
+} EC2_RT;
 
 
 /**
  * Minimum valid EC2 resource type.
  */
-#define HAWSER_EC2_RESOURCE_TYPE_MIN HAWSER_EC2_CUSTOMER_GATEWAY
+#define EC2_RTMIN EC2_CUSTOMER_GATEWAY
 
 
 /**
  * Maximum valid EC2 resource type.
  */
-#define HAWSER_EC2_RESOURCE_TYPE_MAX HAWSER_EC2_VPN_GATEWAY
+#define EC2_RTMAX EC2_VPN_GATEWAY
 
 
 /**
@@ -48,7 +48,7 @@ typedef enum {
  *
  * Calculated as "subnet-12345678" plus terminating NULL byte.
  */
-#define HAWSER_EC2_RESOURCE_ID_STRING_LENGTH 16
+#define EC2_ID_STRLEN 16
 
 
 /**
@@ -56,39 +56,40 @@ typedef enum {
  *
  * DOES NOT INCLUDE terminating NULL byte.
  */
-#define HAWSER_EC2_RESOURCE_ID_ID_LENGTH 8
+#define EC2_ID_IDLEN 8
 
 
 /**
  * An EC2 resource ID.
  */
 typedef struct {
-	HAWSER_EC2_RESOURCE_TYPE resourceType;         /* Type of the resource. */
-	char id[HAWSER_EC2_RESOURCE_ID_ID_LENGTH + 1]; /* Unique ID.            */
-} HAWSER_EC2_RESOURCE_ID;
+	EC2_RT resourceType;       /* Type of the resource. */
+	char id[EC2_ID_IDLEN + 1]; /* Unique ID.            */
+} EC2_ID;
 
 
 /**
- * Parses a string into a HAWSER_EC2_RESOURCE_ID struct.
+ * Parses a string into an EC2_ID struct.
  *
  * Returns HAWSER_NULL if either of the supplied pointers are NULL.
- * STRING must be NULL-terminated.
- * This function will examine up to HAWSER_EC2_RESOURCE_ID_STRING_LENGTH bytes
- * of STRING while looking for the terminating NULL.
+ * Returns HAWSER_INVALID if STRING cannot be parsed.
+ *
+ * STRING must be NULL-terminated, and this function will examine up to
+ * EC2_ID_STRLEN bytes of STRING while looking for the terminating NULL.
  */
-HAWSERresult hawser_ec2_id_read(HAWSER_EC2_RESOURCE_ID *id, const char *string);
+HAWSERresult ec2_ptoid(EC2_ID *id, const char *string);
 
 
 /**
- * Writes a HAWSER_EC2_RESOURCE_ID struct as a string.
+ * Writes an EC2_ID struct as a string.
  *
  * It places the result in STRING, which should be at least
- * HAWSER_EC2_RESOURCE_ID_STRING_LENGTH bytes in length.
+ * EC2_ID_STRLEN bytes in length.
  * If STRING is NULL then the result is placed in a static array.
  *
- * Returns a pointer to the ID string, or NULL on error.
+ * Returns a pointer to the parsed output, or NULL on error.
  */
-const char *hawser_ec2_id_write(char *string, const HAWSER_EC2_RESOURCE_ID *id);
+const char *ec2_idtop(char *string, const EC2_ID *id);
 
 
 #ifdef __cplusplus
