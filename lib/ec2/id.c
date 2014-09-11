@@ -205,7 +205,7 @@ ec2_ptoid(EC2_ID *id, const char *string)
 }
 
 
-const char *
+char *
 ec2_idtop(char *string, const EC2_ID *id)
 {
 	static char internalOutput[EC2_ID_MAX_BYTES];

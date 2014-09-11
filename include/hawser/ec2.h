@@ -89,7 +89,7 @@ HAWSERresult ec2_ptoid(EC2_ID *id, const char *string);
  *
  * Returns a pointer to the parsed output, or NULL on error.
  */
-const char *ec2_idtop(char *string, const EC2_ID *id);
+char *ec2_idtop(char *string, const EC2_ID *id);
 
 
 #ifdef __cplusplus
