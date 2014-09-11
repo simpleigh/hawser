@@ -188,7 +188,7 @@ ec2_ptoid(EC2_ID *id, const char *string)
 		if (strncmp(string, row->tag, cbTag) == COMPARE_EQUAL) {
 			id->resourceType = row->type;
 			strcpy(id->id, pHyphen + 1);
-			id->id[8] = '\0';
+			id->id[EC2_ID_ID_BYTES] = '\0';
 			found = TRUE;
 			break;
 		}
