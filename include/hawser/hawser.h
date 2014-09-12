@@ -48,6 +48,16 @@ typedef enum {
 #define AWS_REGION_MAX AWS_SA_EAST_1
 
 
+/**
+ * AWS credentials.
+ */
+typedef struct {
+	char *accessKeyId;
+	char *secretAccessKey;
+	char *token;
+} AWS_CREDENTIALS;
+
+
 #ifdef __cplusplus
 }
 #endif
