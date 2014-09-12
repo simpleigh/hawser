@@ -9,30 +9,6 @@
 
 
 /**
- * Boolean value for use in logical expressions.
- */
-#define BOOL int
-
-
-/**
- * True value for use in logical expressions.
- */
-#define TRUE 1
-
-
-/**
- * False value for use in logical expressions.
- */
-#define FALSE 0
-
-
-/**
- * Common return value when strings are equal.
- */
-#define COMPARE_EQUAL 0
-
-
-/**
  * Minimum length (in bytes) of an EC2 resource ID string.
  *
  * DOES NOT INCLUDE terminating NULL byte.
@@ -47,6 +23,22 @@
  * DOES NOT INCLUDE terminating NULL byte.
  */
 #define ID_MAX_STRLEN (EC2_ID_MAX_BYTES - 1)
+
+
+/**
+ * Minimum length (in bytes) of the tag part of a resource ID string.
+ *
+ * DOES NOT INCLUDE terminating NULL byte.
+ */
+#define TAG_MIN_STRLEN (ID_MIN_STRLEN - EC2_ID_ID_BYTES - 1)
+
+
+/**
+ * Maximum length (in bytes) of the tag part of a resource ID string.
+ *
+ * DOES NOT INCLUDE terminating NULL byte.
+ */
+#define TAG_MAX_STRLEN (ID_MAX_STRLEN - EC2_ID_ID_BYTES - 1)
 
 
 /**
@@ -81,22 +73,6 @@ static const RT_ROW RESOURCE_TYPES[] = {
 	{ EC2_VPN_GATEWAY,            "vpn-gateway",            "vgw"    },
 	{ 0,                          NULL,                     NULL     }
 };
-
-
-/**
- * Minimum length (in bytes) of the tag part of a resource ID string.
- *
- * DOES NOT INCLUDE terminating NULL byte.
- */
-#define TAG_MIN_STRLEN (ID_MIN_STRLEN - EC2_ID_ID_BYTES - 1)
-
-
-/**
- * Maximum length (in bytes) of the tag part of a resource ID string.
- *
- * DOES NOT INCLUDE terminating NULL byte.
- */
-#define TAG_MAX_STRLEN (ID_MAX_STRLEN - EC2_ID_ID_BYTES - 1)
 
 
 /**
