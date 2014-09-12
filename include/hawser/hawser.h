@@ -20,6 +20,34 @@ typedef enum {
 } HAWSERresult;
 
 
+/**
+ * AWS regions.
+ */
+typedef enum {
+	AWS_BAD_REGION = -1,
+	AWS_US_EAST_1  = 0,
+	AWS_US_WEST_2,
+	AWS_US_WEST_1,
+	AWS_EU_WEST_1,
+	AWS_AP_SOUTHEAST_1,
+	AWS_AP_SOUTHEAST_2,
+	AWS_AP_NORTHEAST_1,
+	AWS_SA_EAST_1
+} AWS_REGION;
+
+
+/**
+ * Minimum valid AWS region.
+ */
+#define AWS_REGION_MIN AWS_US_EAST_1
+
+
+/**
+ * Maximum valid AWS region.
+ */
+#define AWS_REGION_MAX AWS_SA_EAST_1
+
+
 #ifdef __cplusplus
 }
 #endif
