@@ -12,6 +12,7 @@ extern "C" {
  * Types of EC2 resource.
  */
 typedef enum {
+	EC2_RESOURCE_ERROR   = -1, /* Reserved (i.e. a compiler warning hack). */
 	EC2_CUSTOMER_GATEWAY = 0,
 	EC2_DHCP_OPTIONS,
 	EC2_IMAGE,
