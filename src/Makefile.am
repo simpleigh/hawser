@@ -3,8 +3,7 @@
 # Global configuration
 AM_CPPFLAGS = -I../include
 AM_CFLAGS = -Wall -Wextra -std=c89 -pedantic -Werror
-LDADD = ../lib/libhawser.a @LIBCURL@
-AC_CPPFLAGS = @LIBCURL_CPPFLAGS@
+LDADD = ../lib/libhawser.a
 
 # Programs
 bin_PROGRAMS = creds ec2 uriencode base16
@@ -18,13 +17,14 @@ creds_SOURCES = bin/creds.c          \
                 config/iam.c         \
                 config/region.c      \
                 config/user-file.c
+creds_CPPFLAGS = @LIBCURL_CPPFLAGS@
+creds_LDADD = $(LDADD) @LIBCURL@
 
 ec2_SOURCES = bin/ec2.c
-ec2_LDADD = ../lib/libhawser.a @OPENSSL_LDFLAGS@ @OPENSSL_LIBS@ @LIBCURL@
 ec2_INCLUDES = @OPENSSL_INCLUDES@
+ec2_LDFLAGS = @OPENSSL_LDFLAGS@
+ec2_LDADD = $(LDADD) @OPENSSL_LIBS@
 
 uriencode_SOURCES = bin/uriencode.c
-uriencode_LDADD = ../lib/libhawser.a
 
 base16_SOURCES = bin/base16.c
-base16_LDADD = ../lib/libhawser.a
