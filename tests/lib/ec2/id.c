@@ -140,13 +140,13 @@ END_TEST
 
 
 static const EC2_ID INVALID_IDS[] = {
-	{ EC2_RTMIN - 1, "12345678"  },
-	{ EC2_RTMAX + 1, "12345678"  },
-	{ EC2_IMAGE,     "123456789" },
-	{ EC2_IMAGE,     "1234567/"  },
-	{ EC2_IMAGE,     "1234567:"  },
-	{ EC2_IMAGE,     "1234567`"  },
-	{ EC2_IMAGE,     "1234567g"  }
+	{ EC2_RT_MIN - 1, "12345678"  },
+	{ EC2_RT_MAX + 1, "12345678"  },
+	{ EC2_IMAGE,      "123456789" },
+	{ EC2_IMAGE,      "1234567/"  },
+	{ EC2_IMAGE,      "1234567:"  },
+	{ EC2_IMAGE,      "1234567`"  },
+	{ EC2_IMAGE,      "1234567g"  }
 };
 
 

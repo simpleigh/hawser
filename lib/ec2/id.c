@@ -103,8 +103,8 @@ ec2_id_valid(const EC2_ID *id)
 {
 	if (FALSE
 		|| id == NULL
-		|| id->resourceType < EC2_RTMIN
-		|| id->resourceType > EC2_RTMAX
+		|| id->resourceType < EC2_RT_MIN
+		|| id->resourceType > EC2_RT_MAX
 		|| id->id[8] != '\0'
 		|| ec2_id_chars_valid(id->id) == FALSE
 	) {

@@ -35,13 +35,13 @@ typedef enum {
 /**
  * Minimum valid EC2 resource type.
  */
-#define EC2_RTMIN EC2_CUSTOMER_GATEWAY
+#define EC2_RT_MIN EC2_CUSTOMER_GATEWAY
 
 
 /**
  * Maximum valid EC2 resource type.
  */
-#define EC2_RTMAX EC2_VPN_GATEWAY
+#define EC2_RT_MAX EC2_VPN_GATEWAY
 
 
 /**
