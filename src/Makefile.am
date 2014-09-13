@@ -2,7 +2,7 @@
 
 # Global configuration
 AM_CPPFLAGS = -I$(top_srcdir)/include
-AM_CFLAGS = -Wall -Wextra -std=c89 -pedantic -Werror
+AM_CFLAGS = -ansi -Werror -pedantic -Wall -Wextra
 LDADD = $(top_builddir)/lib/libhawser.a
 
 # Programs
