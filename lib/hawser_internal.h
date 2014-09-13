@@ -30,4 +30,14 @@
  */
 #define REQUIRE_NOT_NULL(pointer) if (!pointer) return HAWSER_NULL
 
+
+/**
+ * Returns HAWSER_INVALID if a supplied value is out of range.
+ */
+#define REQUIRE_RANGE(value, min, max) \
+	if ((value) < (min) || (value) > (max)) {\
+		return HAWSER_INVALID;\
+	}
+
+
 #endif /* __HAWSER_INTERNAL_H */

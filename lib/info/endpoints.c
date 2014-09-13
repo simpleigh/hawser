@@ -37,5 +37,9 @@ aws_endpoint(
 	const char **dest
 )
 {
+	REQUIRE_RANGE(service, AWS_SERVICE_MIN, AWS_SERVICE_MAX);
+	REQUIRE_RANGE(region,  AWS_REGION_MIN,  AWS_REGION_MAX);
+	REQUIRE_NOT_NULL(dest);
+
 	return HAWSER_INVALID;
 }
