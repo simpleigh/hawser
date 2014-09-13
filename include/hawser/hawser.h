@@ -14,9 +14,10 @@ extern "C" {
  */
 typedef enum {
 	HAWSER_OK = 0,
-	HAWSER_INVALID, /* Invalid input data.           */
-	HAWSER_NULL,    /* NULL pointer passed as input. */
-	HAWSER_MEMORY   /* Memory allocation issue.      */
+	HAWSER_INVALID,   /* Invalid input data.                     */
+	HAWSER_NULL,      /* NULL pointer passed as input.           */
+	HAWSER_MEMORY,    /* Memory allocation issue.                */
+	HAWSER_BAD_REGION /* Service not supported in chosen region. */
 } HAWSERresult;
 
 
@@ -52,6 +53,34 @@ typedef enum {
  * Number of AWS regions.
  */
 #define AWS_REGION_COUNT (AWS_REGION_MAX - AWS_REGION_MIN + 1)
+
+
+/**
+ * AWS services.
+ */
+typedef enum {
+	SERVICE_INVALID = -1,
+	SERVICE_EC2     =  0,
+	SERVICE_S3
+} AWS_SERVICE;
+
+
+/**
+ * Minimum valid AWS service.
+ */
+#define AWS_SERVICE_MIN SERVICE_EC2
+
+
+/**
+ * Maximum valid AWS service.
+ */
+#define AWS_SERVICE_MAX SERVICE_S3
+
+
+/**
+ * Number of AWS services.
+ */
+#define AWS_SERVICE_COUNT (AWS_SERVICE_MAX - AWS_SERVICE_MIN + 1)
 
 
 /**
