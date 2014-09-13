@@ -74,13 +74,14 @@ START_TEST(test_endpoint_null_dest)
 END_TEST
 
 
-int
-main()
+Suite *
+make_endpoints_suite(void)
 {
-	Suite *s = suite_create("lib/info/endpoints");
-	TCase *tc_core = tcase_create("Core");
-	SRunner *sr;
-	int number_failed;
+	static Suite *s;
+	TCase *tc_core;
+
+	s = suite_create("endpoints");
+	tc_core = tcase_create("Core");
 
 	tcase_add_test(tc_core, test_endpoint_invalid_service);
 	tcase_add_test(tc_core, test_endpoint_invalid_region);
@@ -88,10 +89,5 @@ main()
 	tcase_add_loop_test(tc_core, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
 
 	suite_add_tcase(s, tc_core);
-	sr = srunner_create(s);
-	srunner_run_all(sr, CK_NORMAL);
-	number_failed = srunner_ntests_failed(sr);
-	srunner_free(sr);
-
-	return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
+	return s;
 }

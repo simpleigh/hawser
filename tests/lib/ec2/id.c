@@ -170,13 +170,14 @@ START_TEST(test_idtop_null)
 END_TEST
 
 
-int
-main()
+Suite *
+make_id_suite(void)
 {
-	Suite *s = suite_create("lib/ec2/id");
-	TCase *tc_core = tcase_create("Core");
-	SRunner *sr;
-	int number_failed;
+	static Suite *s;
+	TCase *tc_core;
+
+	s = suite_create("id");
+	tc_core = tcase_create("Core");
 
 	tcase_add_loop_test(tc_core, test_ptoid_valid, 0, N_RESOURCE_TYPES);
 	tcase_add_test(tc_core, test_ptoid_valid_chars);
@@ -189,10 +190,5 @@ main()
 	tcase_add_test(tc_core, test_idtop_null);
 
 	suite_add_tcase(s, tc_core);
-	sr = srunner_create(s);
-	srunner_run_all(sr, CK_NORMAL);
-	number_failed = srunner_ntests_failed(sr);
-	srunner_free(sr);
-
-	return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
+	return s;
 }
