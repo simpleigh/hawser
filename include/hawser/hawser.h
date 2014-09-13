@@ -55,6 +55,34 @@ typedef enum {
 
 
 /**
+ * AWS services.
+ */
+typedef enum {
+	SERVICE_INVALID = -1,
+	SERVICE_EC2     =  0,
+	SERVICE_S3
+} AWS_SERVICE;
+
+
+/**
+ * Minimum valid AWS service.
+ */
+#define AWS_SERVICE_MIN SERVICE_EC2
+
+
+/**
+ * Maximum valid AWS service.
+ */
+#define AWS_SERVICE_MAX SERVICE_S3
+
+
+/**
+ * Number of AWS services.
+ */
+#define AWS_SERVICE_COUNT (AWS_SERVICE_MAX - AWS_SERVICE_MIN + 1)
+
+
+/**
  * AWS credentials.
  */
 typedef struct {
