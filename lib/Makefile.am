@@ -1,20 +1,21 @@
 ## Process this file with automake to produce Makefile.in
 
 # Global configuration
-AM_CPPFLAGS = -I../include
+AM_CPPFLAGS = -I$(top_srcdir)/include
 AM_CFLAGS = -Wall -Wextra -std=c89 -pedantic -Werror
 
 # Main library
 noinst_LIBRARIES = libhawser.a
 
-libhawser_a_SOURCES = ../include/hawser/hawser.h \
-                      ../include/hawser/ec2.h    \
-                      ../include/hawser/info.h   \
-                      buffer.h                   \
-                      buffer.c                   \
-                      curl.h                     \
-                      curl.c                     \
-                      ec2/id.c                   \
-                      encodings.h                \
-                      encodings.c                \
-                      info/endpoints.c
+libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h \
+                      $(top_srcdir)/include/hawser/ec2.h    \
+                      $(top_srcdir)/include/hawser/info.h   \
+                      ec2/id.c          \
+                      info/endpoints.c  \
+                      buffer.c          \
+                      buffer.h          \
+                      curl.c            \
+                      curl.h            \
+                      encodings.c       \
+                      encodings.h       \
+                      hawser_internal.h
