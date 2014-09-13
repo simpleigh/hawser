@@ -9,10 +9,12 @@ noinst_LIBRARIES = libhawser.a
 
 libhawser_a_SOURCES = ../include/hawser/hawser.h \
                       ../include/hawser/ec2.h    \
+                      ../include/hawser/info.h   \
                       buffer.h                   \
                       buffer.c                   \
                       curl.h                     \
                       curl.c                     \
                       ec2/id.c                   \
                       encodings.h                \
-                      encodings.c
+                      encodings.c                \
+                      info/endpoints.c

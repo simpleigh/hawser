@@ -14,9 +14,10 @@ extern "C" {
  */
 typedef enum {
 	HAWSER_OK = 0,
-	HAWSER_INVALID, /* Invalid input data.           */
-	HAWSER_NULL,    /* NULL pointer passed as input. */
-	HAWSER_MEMORY   /* Memory allocation issue.      */
+	HAWSER_INVALID,   /* Invalid input data.                     */
+	HAWSER_NULL,      /* NULL pointer passed as input.           */
+	HAWSER_MEMORY,    /* Memory allocation issue.                */
+	HAWSER_BAD_REGION /* Service not supported in chosen region. */
 } HAWSERresult;
 
 
