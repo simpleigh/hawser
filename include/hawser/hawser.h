@@ -24,8 +24,8 @@ typedef enum {
  * AWS regions.
  */
 typedef enum {
-	AWS_BAD_REGION = -1,
-	AWS_US_EAST_1  = 0,
+	AWS_REGION_INVALID = -1,
+	AWS_US_EAST_1      =  0,
 	AWS_US_WEST_2,
 	AWS_US_WEST_1,
 	AWS_EU_WEST_1,
@@ -46,6 +46,12 @@ typedef enum {
  * Maximum valid AWS region.
  */
 #define AWS_REGION_MAX AWS_SA_EAST_1
+
+
+/**
+ * Number of AWS regions.
+ */
+#define AWS_REGION_COUNT (AWS_REGION_MAX - AWS_REGION_MIN + 1)
 
 
 /**

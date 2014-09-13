@@ -12,8 +12,8 @@ extern "C" {
  * Types of EC2 resource.
  */
 typedef enum {
-	EC2_RESOURCE_ERROR   = -1, /* Reserved (i.e. a compiler warning hack). */
-	EC2_CUSTOMER_GATEWAY = 0,
+	EC2_RESOURCE_INVALID = -1, /* Reserved (i.e. a compiler warning hack). */
+	EC2_CUSTOMER_GATEWAY =  0,
 	EC2_DHCP_OPTIONS,
 	EC2_IMAGE,
 	EC2_INSTANCE,
@@ -42,6 +42,12 @@ typedef enum {
  * Maximum valid EC2 resource type.
  */
 #define EC2_RT_MAX EC2_VPN_GATEWAY
+
+
+/**
+ * Number of EC2 resource types.
+ */
+#define EC2_RT_COUNT (EC2_RT_MAX - EC2_RT_MIN + 1)
 
 
 /**
