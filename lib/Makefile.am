@@ -18,4 +18,6 @@ libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h \
                       curl.h            \
                       encodings.c       \
                       encodings.h       \
-                      hawser_internal.h
+                      hawser_internal.h \
+                      request.c         \
+                      request.h
