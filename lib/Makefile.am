@@ -2,7 +2,7 @@
 
 # Global configuration
 AM_CPPFLAGS = -I$(top_srcdir)/include
-AM_CFLAGS = -ansi -Werror -pedantic -Wall -Wextra
+AM_CFLAGS = -std=c89 -Wall -Wextra -Werror -pedantic -pedantic-errors
 
 # Main library
 noinst_LIBRARIES = libhawser.a
