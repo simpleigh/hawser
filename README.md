@@ -1,7 +1,7 @@
 # hawser
 
-[![Build Status](https://img.shields.io/travis/simpleigh/hawser.svg)](https://travis-ci.org/simpleigh/hawser)
-![Licence](http://img.shields.io/badge/licence-GPLv3-red.svg)
+[![Build Status](https://travis-ci.org/simpleigh/hawser.svg?branch=master)](https://travis-ci.org/simpleigh/hawser)
+![Licence](https://img.shields.io/badge/licence-GPLv3-red.svg?style=flat)
 
 NOTE: hawser is still incomplete and non-functional!
 
