@@ -55,12 +55,12 @@ START_TEST(test_endpoint_starts_with_service)
 	size_t cbService;
 	const char *endpoint;
 
-	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
+	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service++) {
 		result = aws_service(service, &service_name);
 		ck_assert_int_eq(HAWSER_OK, result);
 		cbService = strlen(service_name);
 
-		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region += 1) {
+		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region++) {
 			result = aws_endpoint(service, region, &endpoint);
 
 			if (result == HAWSER_BAD_REGION) {
@@ -83,8 +83,8 @@ START_TEST(test_endpoint_contains_region)
 	const char *region_name;
 	const char *endpoint;
 
-	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
-		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region += 1) {
+	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service++) {
+		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region++) {
 			result = aws_region(region, &region_name);
 			ck_assert_int_eq(HAWSER_OK, result);
 
@@ -112,8 +112,8 @@ START_TEST(test_endpoint_ends_correctly)
 	const char *endpoint;
 	size_t cbEndpoint;
 
-	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
-		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region += 1) {
+	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service++) {
+		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region++) {
 			result = aws_endpoint(service, region, &endpoint);
 
 			if (result == HAWSER_BAD_REGION) {
