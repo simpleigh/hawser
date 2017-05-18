@@ -1,5 +1,6 @@
 #include <check.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "hawser/hawser.h"
 #include "hawser/info.h"
@@ -32,6 +33,66 @@ START_TEST(test_endpoint_valid)
 
 	ck_assert_int_eq(HAWSER_OK, result);
 	ck_assert_str_eq(test.expected, dest);
+}
+END_TEST
+
+
+START_TEST(test_endpoint_starts_with_service)
+{
+	AWS_SERVICE service;
+	AWS_REGION region;
+	HAWSERresult result;
+	const char *service_name;
+	const char *endpoint;
+	size_t cbService;
+
+	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
+		result = aws_service(service, &service_name);
+		ck_assert_int_eq(HAWSER_OK, result);
+		cbService = strlen(service_name);
+
+		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region += 1) {
+			result = aws_endpoint(service, region, &endpoint);
+
+			if (result == HAWSER_BAD_REGION) {
+				/* Skip if not supported */
+				continue;
+			}
+
+			ck_assert_int_eq(0, memcmp(service_name, endpoint, cbService));
+		}
+	}
+}
+END_TEST
+
+
+START_TEST(test_endpoint_ends_correctly)
+{
+	const char *expected = ".amazonaws.com";
+	size_t cbExpected = strlen(expected);
+	AWS_SERVICE service;
+	AWS_REGION region;
+	HAWSERresult result;
+	const char *endpoint;
+	size_t cbEndpoint;
+
+	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
+		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region += 1) {
+			result = aws_endpoint(service, region, &endpoint);
+
+			if (result == HAWSER_BAD_REGION) {
+				/* Skip if not supported */
+				continue;
+			}
+
+			cbEndpoint = strlen(endpoint);
+			ck_assert_int_eq(0, memcmp(
+				expected,
+				endpoint + cbEndpoint - cbExpected,
+				cbExpected + 1  /* Include NUL */
+			));
+		}
+	}
 }
 END_TEST
 
@@ -94,11 +155,13 @@ make_endpoints_suite(void)
 	s = suite_create("endpoints");
 	tc_core = tcase_create("Core");
 
+	tcase_add_loop_test(tc_core, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
+	tcase_add_test(tc_core, test_endpoint_starts_with_service);
+	tcase_add_test(tc_core, test_endpoint_ends_correctly);
 	tcase_add_test(tc_core, test_endpoint_invalid_service);
 	tcase_add_test(tc_core, test_endpoint_invalid_region);
 	tcase_add_test(tc_core, test_endpoint_null_dest);
 	tcase_add_test(tc_core, test_endpoint_bad_region);
-	tcase_add_loop_test(tc_core, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
 
 	suite_add_tcase(s, tc_core);
 	return s;
