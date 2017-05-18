@@ -15,6 +15,7 @@ test_ec2_SOURCES = ec2/id.c \
                    ec2.h
 
 test_info_SOURCES = info/endpoints.c \
+                    info/regions.c   \
                     info/services.c  \
                     info.c           \
                     info.h

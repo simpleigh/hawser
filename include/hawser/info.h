@@ -9,6 +9,20 @@ extern "C" {
 
 
 /**
+ * Obtains the name for a region.
+ *
+ * Places a pointer to the region string in DEST.
+ *
+ * Returns HAWSER_INVALID if the REGION is out of range.
+ * Returns HAWSER_NULL if DEST is NULL.
+ */
+HAWSERresult aws_region(
+	AWS_REGION region,
+	const char **dest
+);
+
+
+/**
  * Obtains the name for a service.
  *
  * Places a pointer to the service string in DEST.
