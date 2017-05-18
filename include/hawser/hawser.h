@@ -26,13 +26,19 @@ typedef enum {
  */
 typedef enum {
 	AWS_REGION_INVALID = -1,
-	AWS_US_EAST_1      =  0,
-	AWS_US_WEST_2,
+	AWS_US_EAST_2      = 0,
+	AWS_US_EAST_1,
 	AWS_US_WEST_1,
-	AWS_EU_WEST_1,
+	AWS_US_WEST_2,
+	AWS_CA_CENTRAL_1,
+	AWS_AP_SOUTH_1,
+	AWS_AP_NORTHEAST_2,
 	AWS_AP_SOUTHEAST_1,
 	AWS_AP_SOUTHEAST_2,
 	AWS_AP_NORTHEAST_1,
+	AWS_EU_CENTRAL_1,
+	AWS_EU_WEST_1,
+	AWS_EU_WEST_2,
 	AWS_SA_EAST_1
 } AWS_REGION;
 
@@ -40,7 +46,7 @@ typedef enum {
 /**
  * Minimum valid AWS region.
  */
-#define AWS_REGION_MIN AWS_US_EAST_1
+#define AWS_REGION_MIN AWS_US_EAST_2
 
 
 /**

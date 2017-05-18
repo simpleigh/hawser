@@ -8,24 +8,36 @@
  */
 static const char *AWS_ENDPOINTS[AWS_SERVICE_COUNT][AWS_REGION_COUNT] = {
 	{
+		"ec2.us-east-2.amazonaws.com",
 		"ec2.us-east-1.amazonaws.com",
-		"ec2.us-west-2.amazonaws.com",
 		"ec2.us-west-1.amazonaws.com",
-		"ec2.eu-west-1.amazonaws.com",
+		"ec2.us-west-2.amazonaws.com",
+		"ec2.ca-central-1.amazonaws.com",
+		"ec2.ap-south-1.amazonaws.com",
+		"ec2.ap-northeast-2.amazonaws.com",
 		"ec2.ap-southeast-1.amazonaws.com",
 		"ec2.ap-southeast-2.amazonaws.com",
 		"ec2.ap-northeast-1.amazonaws.com",
+		"ec2.eu-central-1.amazonaws.com",
+		"ec2.eu-west-1.amazonaws.com",
+		"ec2.eu-west-2.amazonaws.com",
 		"ec2.sa-east-1.amazonaws.com"
 	},
 	{
-		"s3.amazonaws.com",
-		"s3-us-west-2.amazonaws.com",
-		"s3-us-west-1.amazonaws.com",
-		"s3-eu-west-1.amazonaws.com",
-		"s3-ap-southeast-1.amazonaws.com",
-		"s3-ap-southeast-2.amazonaws.com",
-		"s3-ap-northeast-1.amazonaws.com",
-		"s3-sa-east-1.amazonaws.com"
+		"s3.dualstack.us-east-2.amazonaws.com",
+		"s3.dualstack.us-east-1.amazonaws.com",
+		"s3.dualstack.us-west-1.amazonaws.com",
+		"s3.dualstack.us-west-2.amazonaws.com",
+		"s3.dualstack.ca-central-1.amazonaws.com",
+		"s3.dualstack.ap-south-1.amazonaws.com",
+		"s3.dualstack.ap-northeast-2.amazonaws.com",
+		"s3.dualstack.ap-southeast-1.amazonaws.com",
+		"s3.dualstack.ap-southeast-2.amazonaws.com",
+		"s3.dualstack.ap-northeast-1.amazonaws.com",
+		"s3.dualstack.eu-central-1.amazonaws.com",
+		"s3.dualstack.eu-west-1.amazonaws.com",
+		"s3.dualstack.eu-west-2.amazonaws.com",
+		"s3.dualstack.sa-east-1.amazonaws.com"
 	}
 };
 
