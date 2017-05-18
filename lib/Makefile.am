@@ -10,10 +10,18 @@ noinst_LIBRARIES = libhawser.a
 libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h \
                       $(top_srcdir)/include/hawser/ec2.h    \
                       $(top_srcdir)/include/hawser/info.h   \
+                      $(top_srcdir)/include/hawser/lambda.h \
+                      $(top_srcdir)/include/hawser/s3.h     \
+                      $(top_srcdir)/include/hawser/sns.h    \
+                      $(top_srcdir)/include/hawser/sqs.h    \
                       ec2/id.c          \
                       info/endpoints.c  \
                       info/regions.c    \
                       info/services.c   \
+                      lambda/id.c       \
+                      s3/id.c           \
+                      sns/id.c          \
+                      sqs/id.c          \
                       buffer.c          \
                       buffer.h          \
                       curl.c            \
@@ -21,5 +29,7 @@ libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h \
                       encodings.c       \
                       encodings.h       \
                       hawser_internal.h \
+                      id.c              \
+                      id.h              \
                       request.c         \
                       request.h

@@ -14,8 +14,20 @@ test_SOURCES = ec2/id.c         \
                info/endpoints.c \
                info/regions.c   \
                info/services.c  \
+               lambda/id.c      \
+               s3/id.c          \
+               sns/id.c         \
+               sqs/id.c         \
                ec2.c            \
                ec2.h            \
                info.c           \
                info.h           \
+               lambda.c         \
+               lambda.h         \
+               s3.c             \
+               s3.h             \
+               sns.c            \
+               sns.h            \
+               sqs.c            \
+               sqs.h            \
                test.c

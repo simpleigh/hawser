@@ -81,7 +81,7 @@ typedef struct {
  * Returns HAWSER_NULL if either of the supplied pointers are NULL.
  * Returns HAWSER_INVALID if STRING cannot be parsed.
  *
- * STRING must be NULL-terminated, and this function will examine up to
+ * STRING must be NUL-terminated, and this function will examine up to
  * EC2_ID_MAX_BYTES bytes of STRING while looking for the terminating NUL.
  */
 HAWSERresult ec2_ptoid(EC2_ID *id, const char *string);

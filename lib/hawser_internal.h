@@ -1,6 +1,7 @@
 #ifndef __HAWSER_INTERNAL_H
 #define __HAWSER_INTERNAL_H
 
+
 /**
  * Boolean value for use in logical expressions.
  */
@@ -38,6 +39,12 @@
 	if ((value) < (min) || (value) > (max)) {\
 		return HAWSER_INVALID;\
 	}
+
+
+/**
+ * Marks a parameter as unused for GCC.
+ */
+#define UNUSED(x) (void)(x)
 
 
 #endif /* __HAWSER_INTERNAL_H */
