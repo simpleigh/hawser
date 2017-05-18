@@ -42,8 +42,10 @@ encode_uri(BUFFER *bufDestination, const char *szInput, size_t cbInput)
 			|| (c == '.')
 			|| (c == '~')
 		) {
-			buffer_nappend(bufDestination, szInput, 1);
+			/* Copy over one character */
+			buffer_nappend(bufDestination, szInput + ibInput, 1);
 		} else {
+			/* Use sprintf to encode character as hex */
 			sprintf(encoded, "%%%2x", c);
 			buffer_nappend(bufDestination, encoded, 3);
 		}
