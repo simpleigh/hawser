@@ -15,8 +15,16 @@ typedef struct {
 
 
 static const ENDPOINT_TEST ENDPOINT_TESTS[] = {
-	{ SERVICE_EC2, AWS_EU_WEST_1, "ec2.eu-west-1.amazonaws.com"          },
-	{ SERVICE_S3,  AWS_US_EAST_1, "s3.dualstack.us-east-1.amazonaws.com" }
+	{
+		AWS_SERVICE_EC2,
+		AWS_REGION_EU_WEST_1,
+		"ec2.eu-west-1.amazonaws.com"
+	},
+	{
+		AWS_SERVICE_S3,
+		AWS_REGION_US_EAST_1,
+		"s3.dualstack.us-east-1.amazonaws.com"
+	}
 };
 
 
@@ -168,7 +176,7 @@ START_TEST(test_endpoint_bad_region)
 	HAWSERresult result;
 	const char *dest;
 
-	result = aws_endpoint(SERVICE_LAMBDA, AWS_CA_CENTRAL_1, &dest);
+	result = aws_endpoint(AWS_SERVICE_LAMBDA, AWS_REGION_CA_CENTRAL_1, &dest);
 	ck_assert_int_eq(HAWSER_BAD_REGION, result);
 }
 END_TEST

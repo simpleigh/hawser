@@ -12,8 +12,8 @@ typedef struct {
 
 
 static const SERVICE_TEST SERVICE_TESTS[] = {
-	{ SERVICE_EC2, "ec2" },
-	{ SERVICE_S3,  "s3"  }
+	{ AWS_SERVICE_EC2, "ec2" },
+	{ AWS_SERVICE_S3,  "s3"  }
 };
 
 
