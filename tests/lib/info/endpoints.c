@@ -1,6 +1,7 @@
 #include <check.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
+
 
 #include "hawser/hawser.h"
 #include "hawser/info.h"
@@ -43,8 +44,8 @@ START_TEST(test_endpoint_starts_with_service)
 	AWS_REGION region;
 	HAWSERresult result;
 	const char *service_name;
-	const char *endpoint;
 	size_t cbService;
+	const char *endpoint;
 
 	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
 		result = aws_service(service, &service_name);
@@ -60,6 +61,33 @@ START_TEST(test_endpoint_starts_with_service)
 			}
 
 			ck_assert_int_eq(0, memcmp(service_name, endpoint, cbService));
+		}
+	}
+}
+END_TEST
+
+
+START_TEST(test_endpoint_contains_region)
+{
+	AWS_SERVICE service;
+	AWS_REGION region;
+	HAWSERresult result;
+	const char *region_name;
+	const char *endpoint;
+
+	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service += 1) {
+		for (region = AWS_REGION_MIN; region <= AWS_REGION_MAX; region += 1) {
+			result = aws_region(region, &region_name);
+			ck_assert_int_eq(HAWSER_OK, result);
+
+			result = aws_endpoint(service, region, &endpoint);
+
+			if (result == HAWSER_BAD_REGION) {
+				/* Skip if not supported */
+				continue;
+			}
+
+			ck_assert_ptr_ne(NULL, strstr(endpoint, region_name));
 		}
 	}
 }
@@ -157,6 +185,7 @@ make_endpoints_suite(void)
 
 	tcase_add_loop_test(tc_core, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
 	tcase_add_test(tc_core, test_endpoint_starts_with_service);
+	tcase_add_test(tc_core, test_endpoint_contains_region);
 	tcase_add_test(tc_core, test_endpoint_ends_correctly);
 	tcase_add_test(tc_core, test_endpoint_invalid_service);
 	tcase_add_test(tc_core, test_endpoint_invalid_region);
