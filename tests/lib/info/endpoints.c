@@ -13,8 +13,8 @@ typedef struct {
 
 
 static const ENDPOINT_TEST ENDPOINT_TESTS[] = {
-	{ SERVICE_EC2, AWS_EU_WEST_1, "ec2.eu-west-1.amazonaws.com" },
-	{ SERVICE_S3,  AWS_US_EAST_1, "s3.amazonaws.com"            }
+	{ SERVICE_EC2, AWS_EU_WEST_1, "ec2.eu-west-1.amazonaws.com"          },
+	{ SERVICE_S3,  AWS_US_EAST_1, "s3.dualstack.us-east-1.amazonaws.com" }
 };
 
 
