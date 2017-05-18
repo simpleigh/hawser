@@ -1,3 +1,7 @@
 #include <check.h>
 
-Suite *make_id_suite(void);
+
+TCase *tcase_ec2_id(void);
+
+
+Suite *suite_ec2(void);

@@ -1,6 +1,9 @@
 #include <check.h>
 
 
-Suite *make_regions_suite(void);
-Suite *make_services_suite(void);
-Suite *make_endpoints_suite(void);
+TCase *tcase_info_endpoints(void);
+TCase *tcase_info_regions(void);
+TCase *tcase_info_services(void);
+
+
+Suite *suite_info(void);

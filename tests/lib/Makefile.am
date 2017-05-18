@@ -6,16 +6,16 @@ AM_CFLAGS = -std=c89 -Wall -Wextra -Werror -pedantic -pedantic-errors @CHECK_CFL
 LDADD = $(top_builddir)/lib/libhawser.a @CHECK_LIBS@
 
 # CHECK target
-TESTS = test_ec2 test_info
+TESTS = test
 
 check_PROGRAMS = $(TESTS)
 
-test_ec2_SOURCES = ec2/id.c \
-                   ec2.c    \
-                   ec2.h
-
-test_info_SOURCES = info/endpoints.c \
-                    info/regions.c   \
-                    info/services.c  \
-                    info.c           \
-                    info.h
+test_SOURCES = ec2/id.c         \
+               info/endpoints.c \
+               info/regions.c   \
+               info/services.c  \
+               ec2.c            \
+               ec2.h            \
+               info.c           \
+               info.h           \
+               test.c

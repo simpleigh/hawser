@@ -71,19 +71,15 @@ START_TEST(test_region_null_dest)
 END_TEST
 
 
-Suite *
-make_regions_suite(void)
+TCase *
+tcase_info_regions(void)
 {
-	static Suite *s;
-	TCase *tc_core;
+	static TCase *tc;
+	tc = tcase_create("regions");
 
-	s = suite_create("regions");
-	tc_core = tcase_create("Core");
+	tcase_add_loop_test(tc, test_region_valid, 0, N_REGION_TESTS);
+	tcase_add_test(tc, test_region_invalid_region);
+	tcase_add_test(tc, test_region_null_dest);
 
-	tcase_add_loop_test(tc_core, test_region_valid, 0, N_REGION_TESTS);
-	tcase_add_test(tc_core, test_region_invalid_region);
-	tcase_add_test(tc_core, test_region_null_dest);
-
-	suite_add_tcase(s, tc_core);
-	return s;
+	return tc;
 }

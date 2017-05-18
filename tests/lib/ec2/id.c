@@ -170,25 +170,21 @@ START_TEST(test_idtop_null)
 END_TEST
 
 
-Suite *
-make_id_suite(void)
+TCase *
+tcase_ec2_id(void)
 {
-	static Suite *s;
-	TCase *tc_core;
+	static TCase *tc;
+	tc = tcase_create("id");
 
-	s = suite_create("id");
-	tc_core = tcase_create("Core");
+	tcase_add_loop_test(tc, test_ptoid_valid, 0, N_RESOURCE_TYPES);
+	tcase_add_test(tc, test_ptoid_valid_chars);
+	tcase_add_loop_test(tc, test_ptoid_invalid, 0, N_INVALID_STRINGS);
+	tcase_add_test(tc, test_ptoid_null);
 
-	tcase_add_loop_test(tc_core, test_ptoid_valid, 0, N_RESOURCE_TYPES);
-	tcase_add_test(tc_core, test_ptoid_valid_chars);
-	tcase_add_loop_test(tc_core, test_ptoid_invalid, 0, N_INVALID_STRINGS);
-	tcase_add_test(tc_core, test_ptoid_null);
+	tcase_add_loop_test(tc, test_idtop_valid,        0, N_RESOURCE_TYPES);
+	tcase_add_loop_test(tc, test_idtop_valid_static, 0, N_RESOURCE_TYPES);
+	tcase_add_loop_test(tc, test_idtop_invalid,      0, N_INVALID_IDS);
+	tcase_add_test(tc, test_idtop_null);
 
-	tcase_add_loop_test(tc_core, test_idtop_valid,        0, N_RESOURCE_TYPES);
-	tcase_add_loop_test(tc_core, test_idtop_valid_static, 0, N_RESOURCE_TYPES);
-	tcase_add_loop_test(tc_core, test_idtop_invalid,      0, N_INVALID_IDS);
-	tcase_add_test(tc_core, test_idtop_null);
-
-	suite_add_tcase(s, tc_core);
-	return s;
+	return tc;
 }

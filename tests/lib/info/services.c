@@ -59,19 +59,15 @@ START_TEST(test_service_null_dest)
 END_TEST
 
 
-Suite *
-make_services_suite(void)
+TCase *
+tcase_info_services(void)
 {
-	static Suite *s;
-	TCase *tc_core;
+	static TCase *tc;
+	tc = tcase_create("services");
 
-	s = suite_create("services");
-	tc_core = tcase_create("Core");
+	tcase_add_loop_test(tc, test_service_valid, 0, N_SERVICE_TESTS);
+	tcase_add_test(tc, test_service_invalid_service);
+	tcase_add_test(tc, test_service_null_dest);
 
-	tcase_add_loop_test(tc_core, test_service_valid, 0, N_SERVICE_TESTS);
-	tcase_add_test(tc_core, test_service_invalid_service);
-	tcase_add_test(tc_core, test_service_null_dest);
-
-	suite_add_tcase(s, tc_core);
-	return s;
+	return tc;
 }

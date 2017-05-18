@@ -1,22 +1,17 @@
 #include <check.h>
-#include <stdlib.h>
 
 #include "info.h"
 
 
-int
-main()
+Suite *
+suite_info(void)
 {
-	SRunner *sr;
-	int number_failed;
+	static Suite *s;
+	s = suite_create("info");
 
-	sr = srunner_create(make_regions_suite());
-	srunner_add_suite(sr, make_services_suite());
-	srunner_add_suite(sr, make_endpoints_suite());
+	suite_add_tcase(s, tcase_info_endpoints());
+	suite_add_tcase(s, tcase_info_regions());
+	suite_add_tcase(s, tcase_info_services());
 
-	srunner_run_all(sr, CK_NORMAL);
-	number_failed = srunner_ntests_failed(sr);
-	srunner_free(sr);
-
-	return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
+	return s;
 }

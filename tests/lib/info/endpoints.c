@@ -182,24 +182,20 @@ START_TEST(test_endpoint_bad_region)
 END_TEST
 
 
-Suite *
-make_endpoints_suite(void)
+TCase *
+tcase_info_endpoints(void)
 {
-	static Suite *s;
-	TCase *tc_core;
+	static TCase *tc;
+	tc = tcase_create("endpoints");
 
-	s = suite_create("endpoints");
-	tc_core = tcase_create("Core");
+	tcase_add_loop_test(tc, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
+	tcase_add_test(tc, test_endpoint_starts_with_service);
+	tcase_add_test(tc, test_endpoint_contains_region);
+	tcase_add_test(tc, test_endpoint_ends_correctly);
+	tcase_add_test(tc, test_endpoint_invalid_service);
+	tcase_add_test(tc, test_endpoint_invalid_region);
+	tcase_add_test(tc, test_endpoint_null_dest);
+	tcase_add_test(tc, test_endpoint_bad_region);
 
-	tcase_add_loop_test(tc_core, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
-	tcase_add_test(tc_core, test_endpoint_starts_with_service);
-	tcase_add_test(tc_core, test_endpoint_contains_region);
-	tcase_add_test(tc_core, test_endpoint_ends_correctly);
-	tcase_add_test(tc_core, test_endpoint_invalid_service);
-	tcase_add_test(tc_core, test_endpoint_invalid_region);
-	tcase_add_test(tc_core, test_endpoint_null_dest);
-	tcase_add_test(tc_core, test_endpoint_bad_region);
-
-	suite_add_tcase(s, tc_core);
-	return s;
+	return tc;
 }
