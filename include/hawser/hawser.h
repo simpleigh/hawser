@@ -67,6 +67,9 @@ typedef enum {
 typedef enum {
 	SERVICE_INVALID = -1,
 	SERVICE_EC2     =  0,
+	SERVICE_LAMBDA,
+	SERVICE_SNS,
+	SERVICE_SQS,
 	SERVICE_S3
 } AWS_SERVICE;
 

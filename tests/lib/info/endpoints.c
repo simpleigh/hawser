@@ -74,6 +74,17 @@ START_TEST(test_endpoint_null_dest)
 END_TEST
 
 
+START_TEST(test_endpoint_bad_region)
+{
+	HAWSERresult result;
+	const char *dest;
+
+	result = aws_endpoint(SERVICE_LAMBDA, AWS_CA_CENTRAL_1, &dest);
+	ck_assert_int_eq(HAWSER_BAD_REGION, result);
+}
+END_TEST
+
+
 Suite *
 make_endpoints_suite(void)
 {
@@ -86,6 +97,7 @@ make_endpoints_suite(void)
 	tcase_add_test(tc_core, test_endpoint_invalid_service);
 	tcase_add_test(tc_core, test_endpoint_invalid_region);
 	tcase_add_test(tc_core, test_endpoint_null_dest);
+	tcase_add_test(tc_core, test_endpoint_bad_region);
 	tcase_add_loop_test(tc_core, test_endpoint_valid, 0, N_ENDPOINT_TESTS);
 
 	suite_add_tcase(s, tc_core);
