@@ -9,6 +9,20 @@ extern "C" {
 
 
 /**
+ * Obtains the name for a service.
+ *
+ * Places a pointer to the service string in DEST.
+ *
+ * Returns HAWSER_INVALID if the SERVICE is out of range.
+ * Returns HAWSER_NULL if DEST is NULL.
+ */
+HAWSERresult aws_service(
+	AWS_SERVICE service,
+	const char **dest
+);
+
+
+/**
  * Obtains the web endpoint for a service and region.
  *
  * Places a pointer to the endpoint string in DEST.

@@ -3,13 +3,15 @@
 
 #include "info.h"
 
+
 int
 main()
 {
 	SRunner *sr;
 	int number_failed;
 
-	sr = srunner_create(make_endpoints_suite());
+	sr = srunner_create(make_services_suite());
+	srunner_add_suite(sr, make_endpoints_suite());
 
 	srunner_run_all(sr, CK_NORMAL);
 	number_failed = srunner_ntests_failed(sr);

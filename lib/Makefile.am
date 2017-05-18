@@ -12,6 +12,7 @@ libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h \
                       $(top_srcdir)/include/hawser/info.h   \
                       ec2/id.c          \
                       info/endpoints.c  \
+                      info/services.c   \
                       buffer.c          \
                       buffer.h          \
                       curl.c            \

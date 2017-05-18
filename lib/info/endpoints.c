@@ -92,11 +92,7 @@ static const char *AWS_ENDPOINTS[AWS_SERVICE_COUNT][AWS_REGION_COUNT] = {
 
 
 HAWSERresult
-aws_endpoint(
-	AWS_SERVICE service,
-	AWS_REGION region,
-	const char **dest
-)
+aws_endpoint(AWS_SERVICE service, AWS_REGION region, const char **dest)
 {
 	REQUIRE_RANGE(service, AWS_SERVICE_MIN, AWS_SERVICE_MAX);
 	REQUIRE_RANGE(region,  AWS_REGION_MIN,  AWS_REGION_MAX);
