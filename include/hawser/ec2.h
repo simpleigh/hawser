@@ -53,7 +53,7 @@ typedef enum {
 /**
  * Number of bytes required to store an EC2 resource ID string.
  *
- * Calculated as "subnet-12345678" plus terminating NULL byte.
+ * Calculated as "subnet-12345678" plus terminating NUL.
  */
 #define EC2_ID_MAX_BYTES 16
 
@@ -61,7 +61,7 @@ typedef enum {
 /**
  * Number of bytes required to store the ID part of an EC2 resource ID string.
  *
- * DOES NOT INCLUDE terminating NULL byte.
+ * DOES NOT INCLUDE terminating NUL.
  */
 #define EC2_ID_ID_BYTES 8
 
@@ -82,7 +82,7 @@ typedef struct {
  * Returns HAWSER_INVALID if STRING cannot be parsed.
  *
  * STRING must be NULL-terminated, and this function will examine up to
- * EC2_ID_MAX_BYTES bytes of STRING while looking for the terminating NULL.
+ * EC2_ID_MAX_BYTES bytes of STRING while looking for the terminating NUL.
  */
 HAWSERresult ec2_ptoid(EC2_ID *id, const char *string);
 
