@@ -23,14 +23,14 @@ HAWSERresult aws_region(
 
 
 /**
- * Obtains the name for a service.
+ * Obtains the namespace for a service.
  *
- * Places a pointer to the service string in DEST.
+ * Places a pointer to the namespace string in DEST.
  *
  * Returns HAWSER_INVALID if the SERVICE is out of range.
  * Returns HAWSER_NULL if DEST is NULL.
  */
-HAWSERresult aws_service(
+HAWSERresult aws_service_namespace(
 	AWS_SERVICE service,
 	const char **dest
 );

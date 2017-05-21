@@ -56,7 +56,7 @@ START_TEST(test_endpoint_starts_with_service)
 	const char *endpoint;
 
 	for (service = AWS_SERVICE_MIN; service <= AWS_SERVICE_MAX; service++) {
-		result = aws_service(service, &service_name);
+		result = aws_service_namespace(service, &service_name);
 		ck_assert_int_eq(HAWSER_OK, result);
 		cbService = strlen(service_name);
 

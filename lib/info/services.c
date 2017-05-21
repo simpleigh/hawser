@@ -7,7 +7,7 @@
 /**
  * AWS names for each service.
  */
-static const char *AWS_SERVICES[AWS_SERVICE_COUNT] = {
+static const char *AWS_SERVICE_NAMESPACES[AWS_SERVICE_COUNT] = {
 	"ec2",
 	"lambda",
 	"sns",
@@ -18,12 +18,12 @@ static const char *AWS_SERVICES[AWS_SERVICE_COUNT] = {
 
 
 HAWSERresult
-aws_service(AWS_SERVICE service, const char **dest)
+aws_service_namespace(AWS_SERVICE service, const char **dest)
 {
 	REQUIRE_RANGE(service, AWS_SERVICE_MIN, AWS_SERVICE_MAX);
 	REQUIRE_NOT_NULL(dest);
 
-	*dest = AWS_SERVICES[service];
+	*dest = AWS_SERVICE_NAMESPACES[service];
 
 	return HAWSER_OK;
 }

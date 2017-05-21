@@ -27,7 +27,7 @@ START_TEST(test_service_valid)
 	HAWSERresult result;
 	const char *dest;
 
-	result = aws_service(test.service, &dest);
+	result = aws_service_namespace(test.service, &dest);
 
 	ck_assert_int_eq(HAWSER_OK, result);
 	ck_assert_str_eq(test.expected, dest);
@@ -40,10 +40,10 @@ START_TEST(test_service_invalid_service)
 	HAWSERresult result;
 	const char *dest;
 
-	result = aws_service(AWS_SERVICE_MIN - 1, &dest);
+	result = aws_service_namespace(AWS_SERVICE_MIN - 1, &dest);
 	ck_assert_int_eq(HAWSER_INVALID, result);
 
-	result = aws_service(AWS_SERVICE_MAX + 1, &dest);
+	result = aws_service_namespace(AWS_SERVICE_MAX + 1, &dest);
 	ck_assert_int_eq(HAWSER_INVALID, result);
 }
 END_TEST
@@ -53,7 +53,7 @@ START_TEST(test_service_null_dest)
 {
 	HAWSERresult result;
 
-	result = aws_service(AWS_SERVICE_MIN, (const char **)NULL);
+	result = aws_service_namespace(AWS_SERVICE_MIN, (const char **)NULL);
 	ck_assert_int_eq(HAWSER_NULL, result);
 }
 END_TEST
