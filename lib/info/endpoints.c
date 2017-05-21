@@ -72,6 +72,22 @@ static const char *AWS_ENDPOINTS[AWS_SERVICE_COUNT][AWS_REGION_COUNT] = {
 		"sqs.eu-west-2.amazonaws.com",
 		"sqs.sa-east-1.amazonaws.com"
 	},
+	{  /* Amazon STS */
+		"sts.us-east-2.amazonaws.com",
+		"sts.us-east-1.amazonaws.com",
+		"sts.us-west-1.amazonaws.com",
+		"sts.us-west-2.amazonaws.com",
+		"sts.ca-central-1.amazonaws.com",
+		"sts.ap-south-1.amazonaws.com",
+		"sts.ap-northeast-2.amazonaws.com",
+		"sts.ap-southeast-1.amazonaws.com",
+		"sts.ap-southeast-2.amazonaws.com",
+		"sts.ap-northeast-1.amazonaws.com",
+		"sts.eu-central-1.amazonaws.com",
+		"sts.eu-west-1.amazonaws.com",
+		"sts.eu-west-2.amazonaws.com",
+		"sts.sa-east-1.amazonaws.com"
+	},
 	{  /* Amazon S3 */
 		"s3.dualstack.us-east-2.amazonaws.com",
 		"s3.dualstack.us-east-1.amazonaws.com",

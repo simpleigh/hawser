@@ -12,6 +12,7 @@ static const char *AWS_SERVICES[AWS_SERVICE_COUNT] = {
 	"lambda",
 	"sns",
 	"sqs",
+	"sts",
 	"s3"
 };
 
