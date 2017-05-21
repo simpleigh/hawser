@@ -1,7 +1,7 @@
 #include "hawser/hawser.h"
-#include "hawser/s3.h"
+#include "hawser/service/s3.h"
 
-#include "../hawser_internal.h"
+#include "../../hawser_internal.h"
 #include "../id.h"
 
 

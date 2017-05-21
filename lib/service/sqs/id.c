@@ -1,9 +1,9 @@
 #include <string.h>
 
 #include "hawser/hawser.h"
-#include "hawser/sqs.h"
+#include "hawser/service/sqs.h"
 
-#include "../hawser_internal.h"
+#include "../../hawser_internal.h"
 #include "../id.h"
 
 

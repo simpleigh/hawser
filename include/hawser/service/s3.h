@@ -1,7 +1,7 @@
 #ifndef __HAWSER_S3_H
 #define __HAWSER_S3_H
 
-#include "hawser.h"
+#include "../hawser.h"
 
 #ifdef __cplusplus
 extern "C" {

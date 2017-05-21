@@ -1,12 +1,12 @@
 #include <check.h>
 #include <stdlib.h>
 
-#include "ec2.h"
+#include "service/ec2.h"
+#include "service/lambda.h"
+#include "service/s3.h"
+#include "service/sns.h"
+#include "service/sqs.h"
 #include "info.h"
-#include "lambda.h"
-#include "s3.h"
-#include "sns.h"
-#include "sqs.h"
 
 
 Suite *
@@ -25,8 +25,8 @@ main()
 	int number_failed;
 
 	sr = srunner_create(suite_empty());
-	srunner_add_suite(sr, suite_ec2());
 	srunner_add_suite(sr, suite_info());
+	srunner_add_suite(sr, suite_ec2());
 	srunner_add_suite(sr, suite_lambda());
 	srunner_add_suite(sr, suite_s3());
 	srunner_add_suite(sr, suite_sns());

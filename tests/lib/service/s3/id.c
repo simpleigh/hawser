@@ -1,7 +1,7 @@
 #include <check.h>
 
 #include "hawser/hawser.h"
-#include "hawser/s3.h"
+#include "hawser/service/s3.h"
 
 
 static const char * VALID_IDS[] = {

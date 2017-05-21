@@ -1,7 +1,7 @@
 #ifndef __HAWSER_EC2_H
 #define __HAWSER_EC2_H
 
-#include "hawser.h"
+#include "../hawser.h"
 
 #ifdef __cplusplus
 extern "C" {

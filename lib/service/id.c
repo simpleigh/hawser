@@ -2,7 +2,7 @@
 
 #include "hawser/hawser.h"
 
-#include "hawser_internal.h"
+#include "../hawser_internal.h"
 #include "id.h"
 
 

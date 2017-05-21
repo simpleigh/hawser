@@ -10,24 +10,24 @@ TESTS = test
 
 check_PROGRAMS = $(TESTS)
 
-test_SOURCES = ec2/id.c         \
-               info/endpoints.c \
-               info/regions.c   \
-               info/services.c  \
-               lambda/id.c      \
-               s3/id.c          \
-               sns/id.c         \
-               sqs/id.c         \
-               ec2.c            \
-               ec2.h            \
-               info.c           \
-               info.h           \
-               lambda.c         \
-               lambda.h         \
-               s3.c             \
-               s3.h             \
-               sns.c            \
-               sns.h            \
-               sqs.c            \
-               sqs.h            \
+test_SOURCES = info/endpoints.c    \
+               info/regions.c      \
+               info/services.c     \
+               service/ec2/id.c    \
+               service/lambda/id.c \
+               service/s3/id.c     \
+               service/sns/id.c    \
+               service/sqs/id.c    \
+               service/ec2.c       \
+               service/ec2.h       \
+               service/lambda.c    \
+               service/lambda.h    \
+               service/s3.c        \
+               service/s3.h        \
+               service/sns.c       \
+               service/sns.h       \
+               service/sqs.c       \
+               service/sqs.h       \
+               info.c              \
+               info.h              \
                test.c

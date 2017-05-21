@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "hawser/hawser.h"
-#include "hawser/ec2.h"
+#include "hawser/service/ec2.h"
 
 
 typedef struct {

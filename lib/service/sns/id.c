@@ -1,7 +1,7 @@
 #include "hawser/hawser.h"
-#include "hawser/sns.h"
+#include "hawser/service/sns.h"
 
-#include "../hawser_internal.h"
+#include "../../hawser_internal.h"
 #include "../id.h"
 
 

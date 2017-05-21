@@ -3,9 +3,9 @@
 #include <string.h>
 
 #include "hawser/hawser.h"
-#include "hawser/ec2.h"
+#include "hawser/service/ec2.h"
 
-#include "../hawser_internal.h"
+#include "../../hawser_internal.h"
 
 
 /**

@@ -1,17 +1,14 @@
 #include <check.h>
 
 #include "hawser/hawser.h"
-#include "hawser/sns.h"
+#include "hawser/service/lambda.h"
 
 
 static const char * VALID_IDS[] = {
-	"topic",
+	"function",
 	(
-		"123456789012345678901234567890123456789012345678901234567890"
-		"123456789012345678901234567890123456789012345678901234567890"
-		"123456789012345678901234567890123456789012345678901234567890"
-		"123456789012345678901234567890123456789012345678901234567890"
-		"1234567890123456"
+		"1234567890123456789012345678901234567890"
+		"123456789012345678901234"
 	),
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 	"abcdefghijklmnopqrstuvwxyz",
@@ -27,11 +24,8 @@ static const size_t N_VALID_IDS = sizeof(VALID_IDS) / sizeof(char *);
 static const char * INVALID_IDS[] = {
 	"",
 	(
-		"123456789012345678901234567890123456789012345678901234567890"
-		"123456789012345678901234567890123456789012345678901234567890"
-		"123456789012345678901234567890123456789012345678901234567890"
-		"123456789012345678901234567890123456789012345678901234567890"
-		"12345678901234567"
+		"1234567890123456789012345678901234567890"
+		"1234567890123456789012345"
 	),
 	"/"
 };
@@ -42,10 +36,10 @@ static const size_t N_INVALID_IDS = sizeof(INVALID_IDS) / sizeof(char *);
 
 START_TEST(test_valid_ids)
 {
-	SNS_ID id;
+	LAMBDA_ID id;
 	HAWSERresult result;
 
-	result = sns_id_from_string(&id, VALID_IDS[_i]);
+	result = lambda_id_from_string(&id, VALID_IDS[_i]);
 	ck_assert_int_eq(HAWSER_OK, result);
 }
 END_TEST
@@ -53,20 +47,20 @@ END_TEST
 
 START_TEST(test_id_populated)
 {
-	SNS_ID id;
+	LAMBDA_ID id;
 
-	sns_id_from_string(&id, VALID_IDS[_i]);
-	ck_assert_str_eq(VALID_IDS[_i], id.topic_name);
+	lambda_id_from_string(&id, VALID_IDS[_i]);
+	ck_assert_str_eq(VALID_IDS[_i], id.function_name);
 }
 END_TEST
 
 
 START_TEST(test_invalid_ids)
 {
-	SNS_ID id;
+	LAMBDA_ID id;
 	HAWSERresult result;
 
-	result = sns_id_from_string(&id, INVALID_IDS[_i]);
+	result = lambda_id_from_string(&id, INVALID_IDS[_i]);
 	ck_assert_int_eq(HAWSER_INVALID, result);
 }
 END_TEST
@@ -74,21 +68,21 @@ END_TEST
 
 START_TEST(test_null_id)
 {
-	ck_assert_int_eq(HAWSER_NULL, sns_id_from_string(NULL, VALID_IDS[0]));
+	ck_assert_int_eq(HAWSER_NULL, lambda_id_from_string(NULL, VALID_IDS[0]));
 }
 END_TEST
 
 
 START_TEST(test_null_string)
 {
-	SNS_ID id;
-	ck_assert_int_eq(HAWSER_NULL, sns_id_from_string(&id, NULL));
+	LAMBDA_ID id;
+	ck_assert_int_eq(HAWSER_NULL, lambda_id_from_string(&id, NULL));
 }
 END_TEST
 
 
 TCase *
-tcase_sns_id(void)
+tcase_lambda_id(void)
 {
 	static TCase *tc;
 	tc = tcase_create("id");

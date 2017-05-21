@@ -7,29 +7,29 @@ AM_CFLAGS = -std=c89 -Wall -Wextra -Werror -pedantic -pedantic-errors
 # Main library
 noinst_LIBRARIES = libhawser.a
 
-libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h \
-                      $(top_srcdir)/include/hawser/ec2.h    \
-                      $(top_srcdir)/include/hawser/info.h   \
-                      $(top_srcdir)/include/hawser/lambda.h \
-                      $(top_srcdir)/include/hawser/s3.h     \
-                      $(top_srcdir)/include/hawser/sns.h    \
-                      $(top_srcdir)/include/hawser/sqs.h    \
-                      ec2/id.c          \
-                      info/endpoints.c  \
-                      info/regions.c    \
-                      info/services.c   \
-                      lambda/id.c       \
-                      s3/id.c           \
-                      sns/id.c          \
-                      sqs/id.c          \
-                      buffer.c          \
-                      buffer.h          \
-                      curl.c            \
-                      curl.h            \
-                      encodings.c       \
-                      encodings.h       \
-                      hawser_internal.h \
-                      id.c              \
-                      id.h              \
-                      request.c         \
+libhawser_a_SOURCES = $(top_srcdir)/include/hawser/hawser.h         \
+                      $(top_srcdir)/include/hawser/info.h           \
+                      $(top_srcdir)/include/hawser/service/ec2.h    \
+                      $(top_srcdir)/include/hawser/service/lambda.h \
+                      $(top_srcdir)/include/hawser/service/s3.h     \
+                      $(top_srcdir)/include/hawser/service/sns.h    \
+                      $(top_srcdir)/include/hawser/service/sqs.h    \
+                      info/endpoints.c    \
+                      info/regions.c      \
+                      info/services.c     \
+                      service/ec2/id.c    \
+                      service/lambda/id.c \
+                      service/s3/id.c     \
+                      service/sns/id.c    \
+                      service/sqs/id.c    \
+                      service/id.c        \
+                      service/id.h        \
+                      buffer.c            \
+                      buffer.h            \
+                      curl.c              \
+                      curl.h              \
+                      encodings.c         \
+                      encodings.h         \
+                      hawser_internal.h   \
+                      request.c           \
                       request.h

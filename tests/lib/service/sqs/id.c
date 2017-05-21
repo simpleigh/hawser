@@ -1,7 +1,7 @@
 #include <check.h>
 
 #include "hawser/hawser.h"
-#include "hawser/sqs.h"
+#include "hawser/service/sqs.h"
 
 
 static const char * VALID_IDS[] = {
