@@ -72,3 +72,21 @@ sqs_id_from_string (SQS_ID *id, const char *string)
 		&is_valid_id_char
 	);
 }
+
+
+HAWSERresult
+sqs_string_from_id(char **pString, const SQS_ID * const id)
+{
+	static char staticOutput[SQS_ID_BYTES];
+
+	REQUIRE_NOT_NULL(pString);
+	REQUIRE_NOT_NULL(id);
+
+	if (*pString == NULL) {
+		*pString = staticOutput;
+	}
+
+	strncpy(*pString, id->queue_name, SQS_ID_BYTES);
+
+	return HAWSER_OK;
+}

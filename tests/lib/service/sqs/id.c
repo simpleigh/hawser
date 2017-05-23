@@ -77,6 +77,47 @@ START_TEST(test_read_null_string)
 END_TEST
 
 
+START_TEST(test_write_static_memory)
+{
+	SQS_ID id;
+	char *string = NULL;
+
+	ck_assert_int_eq(HAWSER_OK, sqs_id_from_string(&id, VALID_IDS[_i]));
+	ck_assert_int_eq(HAWSER_OK, sqs_string_from_id(&string, &id));
+	ck_assert_str_eq(VALID_IDS[_i], string);
+}
+END_TEST
+
+
+START_TEST(test_write_supplied_memory)
+{
+	SQS_ID id;
+	char aString[SQS_ID_BYTES];
+	char *szString = aString;
+
+	ck_assert_int_eq(HAWSER_OK, sqs_id_from_string(&id, VALID_IDS[_i]));
+	ck_assert_int_eq(HAWSER_OK, sqs_string_from_id(&szString, &id));
+	ck_assert_str_eq(VALID_IDS[_i], szString);
+}
+END_TEST
+
+
+START_TEST(test_write_null_string)
+{
+	SQS_ID id;
+	ck_assert_int_eq(HAWSER_NULL, sqs_string_from_id(NULL, &id));
+}
+END_TEST
+
+
+START_TEST(test_write_null_id)
+{
+	char *string;
+	ck_assert_int_eq(HAWSER_NULL, sqs_string_from_id(&string, NULL));
+}
+END_TEST
+
+
 TCase *
 tcase_sqs_id(void)
 {
@@ -87,6 +128,10 @@ tcase_sqs_id(void)
 	tcase_add_loop_test(tc, test_read_invalid_ids, 0, N_INVALID_IDS);
 	tcase_add_test(tc, test_read_null_id);
 	tcase_add_test(tc, test_read_null_string);
+	tcase_add_test(tc, test_write_null_string);
+	tcase_add_test(tc, test_write_null_id);
+	tcase_add_loop_test(tc, test_write_static_memory, 0, N_VALID_IDS);
+	tcase_add_loop_test(tc, test_write_supplied_memory, 0, N_VALID_IDS);
 
 	return tc;
 }

@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "hawser/hawser.h"
 #include "hawser/service/s3.h"
 
@@ -53,4 +55,22 @@ s3_id_from_string (S3_ID *id, const char *string)
 		ID_MAX_STRLEN,
 		&is_valid_id_char
 	);
+}
+
+
+HAWSERresult
+s3_string_from_id(char **pString, const S3_ID * const id)
+{
+	static char staticOutput[S3_ID_BYTES];
+
+	REQUIRE_NOT_NULL(pString);
+	REQUIRE_NOT_NULL(id);
+
+	if (*pString == NULL) {
+		*pString = staticOutput;
+	}
+
+	strncpy(*pString, id->bucket_name, S3_ID_BYTES);
+
+	return HAWSER_OK;
 }

@@ -34,6 +34,18 @@ typedef struct {
 HAWSERresult lambda_id_from_string(LAMBDA_ID *id, const char *string);
 
 
+/**
+ * Renders a LAMBDA_ID struct as a string.
+ *
+ * Returns HAWSER_NULL if either of the supplied pointers are NULL.
+ *
+ * *STRING should point to memory of at least LAMBDA_ID_BYTES in length; the
+ * output will be written to that location.
+ * If *STRING is NULL then it will be set to a static array with the result.
+ */
+HAWSERresult lambda_string_from_id(char **pString, const LAMBDA_ID * const id);
+
+
 #ifdef __cplusplus
 }
 #endif

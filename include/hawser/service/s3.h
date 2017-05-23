@@ -34,6 +34,18 @@ typedef struct {
 HAWSERresult s3_id_from_string(S3_ID *id, const char *string);
 
 
+/**
+ * Renders an S3_ID struct as a string.
+ *
+ * Returns HAWSER_NULL if either of the supplied pointers are NULL.
+ *
+ * *STRING should point to memory of at least S3_ID_BYTES in length; the
+ * output will be written to that location.
+ * If *STRING is NULL then it will be set to a static array with the result.
+ */
+HAWSERresult s3_string_from_id(char **pString, const S3_ID * const id);
+
+
 #ifdef __cplusplus
 }
 #endif
