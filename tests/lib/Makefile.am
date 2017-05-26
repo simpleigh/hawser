@@ -28,6 +28,8 @@ test_SOURCES = info/endpoints.c    \
                service/sns.h       \
                service/sqs.c       \
                service/sqs.h       \
+               encodings.c         \
+               encodings.h         \
                info.c              \
                info.h              \
                test.c
